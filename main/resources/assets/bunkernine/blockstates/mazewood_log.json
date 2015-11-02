@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"axis=x": { "model": "bunkernine:mazewood_log_side", "y": 90 },
+		"axis=y": { "model": "bunkernine:mazewood_log" },
+		"axis=z": { "model": "bunkernine:mazewood_log_side" },
+		"axis=none": { "model": "bunkernine:mazewood_bark" }
+	}
+}

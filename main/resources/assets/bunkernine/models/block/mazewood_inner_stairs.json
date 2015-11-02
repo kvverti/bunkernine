@@ -1,0 +1,8 @@
+{
+	"parent": "block/inner_stairs",
+	"textures": {
+		"bottom": "bunkernine:blocks/planks_mazewood",
+		"side": "bunkernine:blocks/planks_mazewood",
+		"top": "bunkernine:blocks/planks_mazewood"
+	}
+}

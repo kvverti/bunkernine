@@ -1,0 +1,8 @@
+[{
+	"modid": "bunkernine",
+	"name": "Bunker 9",
+	"description": "TODO add description.",
+	"version": "${version}",
+	"mcversion": "1.8",
+	"authorList": ["kwerti"]
+}]

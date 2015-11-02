@@ -1,0 +1,23 @@
+{
+	"ambientocclusion": false,
+	"textures": {
+		"particle": "bunkernine:blocks/fluorescent_light",
+		"light": "bunkernine:blocks/fluorescent_light",
+		"side": "bunkernine:blocks/fluorescent_light_side"
+	},
+	"elements": [
+		{
+			"element": "WEST_EAST",
+			"from": [0,7,7],
+			"to": [16,9,9],
+			"faces": {
+				"down": { "texture": "#light", "tintindex": 0 },
+				"up": { "texture": "#light", "tintindex": 0 },
+				"north": { "uv": [0,14,16,16], "texture": "#side", "tintindex": 0 },
+				"south": { "uv": [0,14,16,16], "texture": "#side", "tintindex": 0 },
+				"west": { "uv": [7,14,9,16], "texture": "#side", "tintindex": 0 },
+				"east": { "uv": [7,14,9,16], "texture": "#side", "tintindex": 0 }
+			}
+		}
+	]
+}

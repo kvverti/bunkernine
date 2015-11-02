@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"half=bottom,variant=default": { "model": "bunkernine:mazewood_slab_lower" },
+		"half=top,variant=default": { "model": "bunkernine:mazewood_slab_upper" }
+	}
+}

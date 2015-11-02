@@ -1,0 +1,7 @@
+{
+    "parent": "block/pane_ns",
+    "textures": {
+        "edge": "bunkernine:blocks/glass_pane_clouded_top",
+        "pane": "bunkernine:blocks/glass_clouded"
+    }
+}

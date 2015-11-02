@@ -1,0 +1,40 @@
+
+tile.cityStone.name=City Stone
+tile.logMazewood.name=Mazewood
+tile.planksMazewood.name=Mazewood Planks
+tile.slabMazewood.name=Mazewood Slab
+tile.stairsMazewood.name=Mazewood Stairs
+tile.fenceMazewood.name=Mazewood Fence
+tile.fenceGateMazewood.name=Mazewood Fence Gate
+tile.cloudedGlass.name=Clouded Glass
+tile.cloudedGlassPane.name=Clouded Glass Pane
+tile.fluorescentLight.white.name=Fluorescent Light
+tile.fluorescentLight.orange.name=Orange Fluorescent Light
+tile.fluorescentLight.magenta.name=Magenta Fluorescent Light
+tile.fluorescentLight.lightBlue.name=Light Blue Fluorescent Light
+tile.fluorescentLight.yellow.name=Yellow Fluorescent Light
+tile.fluorescentLight.lime.name=Lime Fluorescent Light
+tile.fluorescentLight.pink.name=Pink Fluorescent Light
+tile.fluorescentLight.gray.name=Gray Fluorescent Light
+tile.fluorescentLight.silver.name=Silver Fluorescent Light
+tile.fluorescentLight.cyan.name=Cyan Fluorescent Light
+tile.fluorescentLight.purple.name=Argon Light
+tile.fluorescentLight.blue.name=Xenon Light
+tile.fluorescentLight.brown.name=Brown Fluorescent Light
+tile.fluorescentLight.green.name=Green Fluorescent Light
+tile.fluorescentLight.red.name=Neon Light
+tile.fluorescentLight.peach.name=Helium Light
+tile.rope.name=Rope
+tile.oreSilicon.name=Silicate
+tile.blockSilicon.name=Block of Silicon
+tile.leavesMazewood.name=Mazewood Leaves
+tile.saplingMazewood.name=Mazewood Sapling
+
+item.glassShard.name=Glass Shard
+item.nineSpawnEgg.name=Spawn %s
+
+entity.bunkernine.DebugAxis.name=Debug Axis
+entity.bunkernine.WitherStump.name=Splootch
+
+itemGroup.nineBlocks=Bunker 9 Blocks
+itemGroup.nineItems=Bunker 9 Items

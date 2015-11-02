@@ -1,0 +1,134 @@
+{
+	"variants": {
+		"bottom=false,facing=down,left=false,right=false,top=false": { "model": "bunkernine:fluorescent_ew", "x": 270 },
+
+		"bottom=true,facing=down,left=false,right=false,top=false": { "model": "bunkernine:fluorescent_s", "x": 270 },
+		"bottom=false,facing=down,left=true,right=false,top=false": { "model": "bunkernine:fluorescent_w", "x": 270 },
+		"bottom=false,facing=down,left=false,right=true,top=false": { "model": "bunkernine:fluorescent_e", "x": 270 },
+		"bottom=false,facing=down,left=false,right=false,top=true": { "model": "bunkernine:fluorescent_n", "x": 270 },
+
+		"bottom=true,facing=down,left=true,right=false,top=false": { "model": "bunkernine:fluorescent_sw", "x": 270 },
+		"bottom=true,facing=down,left=false,right=true,top=false": { "model": "bunkernine:fluorescent_se", "x": 270 },
+		"bottom=true,facing=down,left=false,right=false,top=true": { "model": "bunkernine:fluorescent_ns", "x": 270 },
+		"bottom=false,facing=down,left=true,right=true,top=false": { "model": "bunkernine:fluorescent_ew", "x": 270 },
+		"bottom=false,facing=down,left=true,right=false,top=true": { "model": "bunkernine:fluorescent_nw", "x": 270 },
+		"bottom=false,facing=down,left=false,right=true,top=true": { "model": "bunkernine:fluorescent_ne", "x": 270 },
+
+		"bottom=true,facing=down,left=true,right=true,top=false": { "model": "bunkernine:fluorescent_sew", "x": 270 },
+		"bottom=true,facing=down,left=true,right=false,top=true": { "model": "bunkernine:fluorescent_nsw", "x": 270 },
+		"bottom=true,facing=down,left=false,right=true,top=true": { "model": "bunkernine:fluorescent_nse", "x": 270 },
+		"bottom=false,facing=down,left=true,right=true,top=true": { "model": "bunkernine:fluorescent_new", "x": 270 },
+
+		"bottom=true,facing=down,left=true,right=true,top=true": { "model": "bunkernine:fluorescent_nsew", "x": 270 },
+
+
+		"bottom=false,facing=up,left=false,right=false,top=false": { "model": "bunkernine:fluorescent_ew", "x": 90 },
+
+		"bottom=true,facing=up,left=false,right=false,top=false": { "model": "bunkernine:fluorescent_s", "x": 90 },
+		"bottom=false,facing=up,left=true,right=false,top=false": { "model": "bunkernine:fluorescent_w", "x": 90 },
+		"bottom=false,facing=up,left=false,right=true,top=false": { "model": "bunkernine:fluorescent_e", "x": 90 },
+		"bottom=false,facing=up,left=false,right=false,top=true": { "model": "bunkernine:fluorescent_n", "x": 90 },
+
+		"bottom=true,facing=up,left=true,right=false,top=false": { "model": "bunkernine:fluorescent_sw", "x": 90 },
+		"bottom=true,facing=up,left=false,right=true,top=false": { "model": "bunkernine:fluorescent_se", "x": 90 },
+		"bottom=true,facing=up,left=false,right=false,top=true": { "model": "bunkernine:fluorescent_ns", "x": 90 },
+		"bottom=false,facing=up,left=true,right=true,top=false": { "model": "bunkernine:fluorescent_ew", "x": 90 },
+		"bottom=false,facing=up,left=true,right=false,top=true": { "model": "bunkernine:fluorescent_nw", "x": 90 },
+		"bottom=false,facing=up,left=false,right=true,top=true": { "model": "bunkernine:fluorescent_ne", "x": 90 },
+
+		"bottom=true,facing=up,left=true,right=true,top=false": { "model": "bunkernine:fluorescent_sew", "x": 90 },
+		"bottom=true,facing=up,left=true,right=false,top=true": { "model": "bunkernine:fluorescent_nsw", "x": 90 },
+		"bottom=true,facing=up,left=false,right=true,top=true": { "model": "bunkernine:fluorescent_nse", "x": 90 },
+		"bottom=false,facing=up,left=true,right=true,top=true": { "model": "bunkernine:fluorescent_new", "x": 90 },
+
+		"bottom=true,facing=up,left=true,right=true,top=true": { "model": "bunkernine:fluorescent_nsew", "x": 90 },
+
+
+		"bottom=false,facing=north,left=false,right=false,top=false": { "model": "bunkernine:fluorescent_ew", "y": 180 },
+
+		"bottom=true,facing=north,left=false,right=false,top=false": { "model": "bunkernine:fluorescent_s", "y": 180 },
+		"bottom=false,facing=north,left=true,right=false,top=false": { "model": "bunkernine:fluorescent_w", "y": 180 },
+		"bottom=false,facing=north,left=false,right=true,top=false": { "model": "bunkernine:fluorescent_e", "y": 180 },
+		"bottom=false,facing=north,left=false,right=false,top=true": { "model": "bunkernine:fluorescent_n", "y": 180 },
+
+		"bottom=true,facing=north,left=true,right=false,top=false": { "model": "bunkernine:fluorescent_sw", "y": 180 },
+		"bottom=true,facing=north,left=false,right=true,top=false": { "model": "bunkernine:fluorescent_se", "y": 180 },
+		"bottom=true,facing=north,left=false,right=false,top=true": { "model": "bunkernine:fluorescent_ns", "y": 180 },
+		"bottom=false,facing=north,left=true,right=true,top=false": { "model": "bunkernine:fluorescent_ew", "y": 180 },
+		"bottom=false,facing=north,left=true,right=false,top=true": { "model": "bunkernine:fluorescent_nw", "y": 180 },
+		"bottom=false,facing=north,left=false,right=true,top=true": { "model": "bunkernine:fluorescent_ne", "y": 180 },
+
+		"bottom=true,facing=north,left=true,right=true,top=false": { "model": "bunkernine:fluorescent_sew", "y": 180 },
+		"bottom=true,facing=north,left=true,right=false,top=true": { "model": "bunkernine:fluorescent_nsw", "y": 180 },
+		"bottom=true,facing=north,left=false,right=true,top=true": { "model": "bunkernine:fluorescent_nse", "y": 180 },
+		"bottom=false,facing=north,left=true,right=true,top=true": { "model": "bunkernine:fluorescent_new", "y": 180 },
+
+		"bottom=true,facing=north,left=true,right=true,top=true": { "model": "bunkernine:fluorescent_nsew", "y": 180 },
+
+
+		"bottom=false,facing=south,left=false,right=false,top=false": { "model": "bunkernine:fluorescent_ew" },
+
+		"bottom=true,facing=south,left=false,right=false,top=false": { "model": "bunkernine:fluorescent_s" },
+		"bottom=false,facing=south,left=true,right=false,top=false": { "model": "bunkernine:fluorescent_w" },
+		"bottom=false,facing=south,left=false,right=true,top=false": { "model": "bunkernine:fluorescent_e" },
+		"bottom=false,facing=south,left=false,right=false,top=true": { "model": "bunkernine:fluorescent_n" },
+
+		"bottom=true,facing=south,left=true,right=false,top=false": { "model": "bunkernine:fluorescent_sw" },
+		"bottom=true,facing=south,left=false,right=true,top=false": { "model": "bunkernine:fluorescent_se" },
+		"bottom=true,facing=south,left=false,right=false,top=true": { "model": "bunkernine:fluorescent_ns" },
+		"bottom=false,facing=south,left=true,right=true,top=false": { "model": "bunkernine:fluorescent_ew" },
+		"bottom=false,facing=south,left=true,right=false,top=true": { "model": "bunkernine:fluorescent_nw" },
+		"bottom=false,facing=south,left=false,right=true,top=true": { "model": "bunkernine:fluorescent_ne" },
+
+		"bottom=true,facing=south,left=true,right=true,top=false": { "model": "bunkernine:fluorescent_sew" },
+		"bottom=true,facing=south,left=true,right=false,top=true": { "model": "bunkernine:fluorescent_nsw" },
+		"bottom=true,facing=south,left=false,right=true,top=true": { "model": "bunkernine:fluorescent_nse" },
+		"bottom=false,facing=south,left=true,right=true,top=true": { "model": "bunkernine:fluorescent_new" },
+
+		"bottom=true,facing=south,left=true,right=true,top=true": { "model": "bunkernine:fluorescent_nsew" },
+
+
+		"bottom=false,facing=west,left=false,right=false,top=false": { "model": "bunkernine:fluorescent_ew", "y": 90 },
+
+		"bottom=true,facing=west,left=false,right=false,top=false": { "model": "bunkernine:fluorescent_s", "y": 90 },
+		"bottom=false,facing=west,left=true,right=false,top=false": { "model": "bunkernine:fluorescent_w", "y": 90 },
+		"bottom=false,facing=west,left=false,right=true,top=false": { "model": "bunkernine:fluorescent_e", "y": 90 },
+		"bottom=false,facing=west,left=false,right=false,top=true": { "model": "bunkernine:fluorescent_n", "y": 90 },
+
+		"bottom=true,facing=west,left=true,right=false,top=false": { "model": "bunkernine:fluorescent_sw", "y": 90 },
+		"bottom=true,facing=west,left=false,right=true,top=false": { "model": "bunkernine:fluorescent_se", "y": 90 },
+		"bottom=true,facing=west,left=false,right=false,top=true": { "model": "bunkernine:fluorescent_ns", "y": 90 },
+		"bottom=false,facing=west,left=true,right=true,top=false": { "model": "bunkernine:fluorescent_ew", "y": 90 },
+		"bottom=false,facing=west,left=true,right=false,top=true": { "model": "bunkernine:fluorescent_nw", "y": 90 },
+		"bottom=false,facing=west,left=false,right=true,top=true": { "model": "bunkernine:fluorescent_ne", "y": 90 },
+
+		"bottom=true,facing=west,left=true,right=true,top=false": { "model": "bunkernine:fluorescent_sew", "y": 90 },
+		"bottom=true,facing=west,left=true,right=false,top=true": { "model": "bunkernine:fluorescent_nsw", "y": 90 },
+		"bottom=true,facing=west,left=false,right=true,top=true": { "model": "bunkernine:fluorescent_nse", "y": 90 },
+		"bottom=false,facing=west,left=true,right=true,top=true": { "model": "bunkernine:fluorescent_new", "y": 90 },
+
+		"bottom=true,facing=west,left=true,right=true,top=true": { "model": "bunkernine:fluorescent_nsew", "y": 90 },
+
+
+		"bottom=false,facing=east,left=false,right=false,top=false": { "model": "bunkernine:fluorescent_ew", "y": 270 },
+
+		"bottom=true,facing=east,left=false,right=false,top=false": { "model": "bunkernine:fluorescent_s", "y": 270 },
+		"bottom=false,facing=east,left=true,right=false,top=false": { "model": "bunkernine:fluorescent_w", "y": 270 },
+		"bottom=false,facing=east,left=false,right=true,top=false": { "model": "bunkernine:fluorescent_e", "y": 270 },
+		"bottom=false,facing=east,left=false,right=false,top=true": { "model": "bunkernine:fluorescent_n", "y": 270 },
+
+		"bottom=true,facing=east,left=true,right=false,top=false": { "model": "bunkernine:fluorescent_sw", "y": 270 },
+		"bottom=true,facing=east,left=false,right=true,top=false": { "model": "bunkernine:fluorescent_se", "y": 270 },
+		"bottom=true,facing=east,left=false,right=false,top=true": { "model": "bunkernine:fluorescent_ns", "y": 270 },
+		"bottom=false,facing=east,left=true,right=true,top=false": { "model": "bunkernine:fluorescent_ew", "y": 270 },
+		"bottom=false,facing=east,left=true,right=false,top=true": { "model": "bunkernine:fluorescent_nw", "y": 270 },
+		"bottom=false,facing=east,left=false,right=true,top=true": { "model": "bunkernine:fluorescent_ne", "y": 270 },
+
+		"bottom=true,facing=east,left=true,right=true,top=false": { "model": "bunkernine:fluorescent_sew", "y": 270 },
+		"bottom=true,facing=east,left=true,right=false,top=true": { "model": "bunkernine:fluorescent_nsw", "y": 270 },
+		"bottom=true,facing=east,left=false,right=true,top=true": { "model": "bunkernine:fluorescent_nse", "y": 270 },
+		"bottom=false,facing=east,left=true,right=true,top=true": { "model": "bunkernine:fluorescent_new", "y": 270 },
+
+		"bottom=true,facing=east,left=true,right=true,top=true": { "model": "bunkernine:fluorescent_nsew", "y": 270 }
+	}
+}

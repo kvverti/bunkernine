@@ -1,0 +1,6 @@
+{
+	"parent": "block/fence_n",
+	"textures": {
+		"texture": "bunkernine:blocks/planks_mazewood"
+	}
+}

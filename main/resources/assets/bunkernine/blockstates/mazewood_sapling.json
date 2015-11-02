@@ -1,0 +1,6 @@
+{
+	"variants": {
+		"stage=0": { "model": "bunkernine:mazewood_sapling" },
+		"stage=1": { "model": "bunkernine:mazewood_sapling" }
+	}
+}

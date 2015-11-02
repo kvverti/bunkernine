@@ -1,0 +1,7 @@
+{
+	"parent": "block/column_side",
+	"textures": {
+		"end": "bunkernine:blocks/log_mazewood_top",
+		"side": "bunkernine:blocks/log_mazewood"
+	}
+}

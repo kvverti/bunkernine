@@ -3,6 +3,7 @@ package kvverti.bnine.client;
 import java.io.*;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,7 +29,7 @@ public class Resources implements IResourceManagerReloadListener {
 	private static final String[] EGG_KEYS = { "witherstump" };
 	private static final ResourceLocation COLORS = new ResourceLocation(Meta.ID + ":colors.json");
 
-	private Map<String, String> colorsFluorescent = new HashMap<String, String>(32);
+	private Map<NineLightColor, String> colorsFluorescent = new EnumMap<NineLightColor, String>(NineLightColor.class);
 	private Map<String, String> colorsBlock = new HashMap<String, String>(16);
 	private Map<String, String> colorsEggPrimary = new HashMap<String, String>(16);
 	private Map<String, String> colorsEggSecondary = new HashMap<String, String>(16);
@@ -42,7 +43,7 @@ public class Resources implements IResourceManagerReloadListener {
 
 	public String getColorFluorescent(NineLightColor color) {
 
-		return colorsFluorescent.get(color.getName());
+		return colorsFluorescent.get(color);
 	}
 
 	public String getColorFoliage(String id) {
@@ -86,40 +87,45 @@ public class Resources implements IResourceManagerReloadListener {
 				in = resource.getInputStream();
 				reader = new BufferedReader(new InputStreamReader(in));
 				JsonObject json = new Gson().fromJson(reader, JsonElement.class).getAsJsonObject();
-				JsonObject fluorescent = json.getAsJsonObject("fluorescent");
-
 				JsonElement colElem;
-				for(NineLightColor c : NineLightColor.values()) {
 
-					if(c == NineLightColor.NULL) continue;
+				JsonObject colorObject = json.getAsJsonObject("fluorescent");
+				if(colorObject != null) {
 
-					colElem = fluorescent.get(c.getName());
-					if(colElem != null && colElem.isJsonPrimitive()) {
+					for(NineLightColor c : NineLightColor.values()) {
 
-						colorsFluorescent.put(c.getName(), colElem.getAsString());
+						colElem = colorObject.get(c.getName());
+						if(colElem != null && colElem.isJsonPrimitive()) {
+
+							colorsFluorescent.put(c, colElem.getAsString());
+						}
 					}
 				}
 
-				JsonObject foliage = json.getAsJsonObject("block");
+				colorObject = json.getAsJsonObject("block");
+				if(colorObject != null) {
 
-				for(String s : BLOCK_KEYS) {
+					for(String s : BLOCK_KEYS) {
 
-					colElem = foliage.get(s);
-					if(colElem != null && colElem.isJsonPrimitive()) {
+						colElem = colorObject.get(s);
+						if(colElem != null && colElem.isJsonPrimitive()) {
 
-						colorsBlock.put(s, colElem.getAsString());
+							colorsBlock.put(s, colElem.getAsString());
+						}
 					}
 				}
 
-				JsonObject eggs = json.getAsJsonObject("egg");
+				colorObject = json.getAsJsonObject("egg");
+				if(colorObject != null) {
 
-				for(String s : EGG_KEYS) {
+					for(String s : EGG_KEYS) {
 
-					colElem = eggs.get(s);
-					if(colElem != null && colElem.isJsonArray()) {
+						colElem = colorObject.get(s);
+						if(colElem != null && colElem.isJsonArray()) {
 
-						colorsEggPrimary.put(s, ((JsonArray) colElem).get(0).getAsString());
-						colorsEggSecondary.put(s, ((JsonArray) colElem).get(1).getAsString());
+							colorsEggPrimary.put(s, ((JsonArray) colElem).get(0).getAsString());
+							colorsEggSecondary.put(s, ((JsonArray) colElem).get(1).getAsString());
+						}
 					}
 				}
 

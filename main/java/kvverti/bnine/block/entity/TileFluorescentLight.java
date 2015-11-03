@@ -167,8 +167,7 @@ public class TileFluorescentLight extends TileEntity implements IUpdatePlayerLis
 
 				setColor(tag.getInteger(CUSTOM_COLOR));
 			}
-			return;
-		}
-		setDefaultColor(NineLightColor.byMetadata(stack.getMetadata()));
+
+		} else setDefaultColor(NineLightColor.byMetadata(stack.getMetadata()));
 	}
 }

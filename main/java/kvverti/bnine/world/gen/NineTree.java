@@ -43,27 +43,7 @@ public class NineTree extends WorldGenAbstractTree {
 		int height = rand.nextInt(4) + minHeight;
 		BlockPos leafOrigin = pos.add(0, height - 1, 0);
 
-		for(int i = 0; i < height; i++) {
-
-			if(world.getBlockState(pos.add(0, i, 0)).getBlock() != Blocks.air) {
-
-				return false;
-			}
-		}
-
-		for(int x = -2; x <= 2; x++) {
-
-			for(int y = -2; y <= 1; y++) {
-
-				for(int z = -2; z <= 2; z++) {
-
-					if(!isReplaceable(world, leafOrigin.add(x, y, z))) {
-
-						return false;
-					}
-				}
-			}
-		}
+		if(!verify(world, pos, leafOrigin, height)) return false;
 
 		for(int x = -2; x <= 2; x++) {
 
@@ -108,5 +88,31 @@ public class NineTree extends WorldGenAbstractTree {
 	protected boolean func_150523_a(Block block) {
 
 		return super.func_150523_a(block) || block == NineBlocks.logMazewood;
+	}
+
+	public boolean verify(World world, BlockPos origin, BlockPos leafOrigin, int trunkHeight) {
+
+		for(int i = 0; i < trunkHeight; i++) {
+
+			if(world.getBlockState(origin.add(0, i, 0)).getBlock() != Blocks.air) {
+
+				return false;
+			}
+		}
+
+		for(int x = -2; x <= 2; x++) {
+
+			for(int y = -2; y <= 1; y++) {
+
+				for(int z = -2; z <= 2; z++) {
+
+					if(!isReplaceable(world, leafOrigin.add(x, y, z))) {
+
+						return false;
+					}
+				}
+			}
+		}
+		return true;
 	}
 }

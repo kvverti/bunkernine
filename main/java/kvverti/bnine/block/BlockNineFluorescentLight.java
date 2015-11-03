@@ -377,7 +377,7 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 
 		if(canConnectTo(world, pos, side)) {
 
-			return (byte) ((TileFluorescentLight) tile).getPower();
+			return ((TileFluorescentLight) tile).getPower();
 
 		} else return (byte) 0;
 	}

@@ -385,6 +385,8 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 	@Override
 	public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune) {
 
+		if(world.rand.nextFloat() > chance) return;
+
 		TileEntity te = world.getTileEntity(pos);
 
 		if(te instanceof TileFluorescentLight) {

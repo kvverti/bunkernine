@@ -91,7 +91,7 @@ public class ItemNineSpawnEgg extends ItemNine {
 
 	public Entity spawnCreature(World world, int entityIndex, double x, double y, double z) {
 
-		Class<? extends Entity> entityClass = ENTITY_TYPES.get(entityIndex);
+		Class<? extends Entity> entityClass = entityIndex < ENTITY_TYPES.size() ? ENTITY_TYPES.get(entityIndex) : null;
 		if(entityClass == null) return null;
 
 		Entity entity = null;

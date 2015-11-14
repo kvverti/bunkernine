@@ -111,6 +111,10 @@ public class TileFluorescentLight extends TileEntity implements IUpdatePlayerLis
 
 		if(!worldObj.isRemote) {
 
+			IBlockState state = worldObj.getBlockState(pos);
+			BlockNineFluorescentLight block = (BlockNineFluorescentLight) state.getBlock();
+			byte lightPower = block.getLightPowered(worldObj, pos);
+
 			if(worldObj.isBlockPowered(pos)) {
 
 				int i = worldObj.getRedstonePower(pos.down(), EnumFacing.DOWN);
@@ -120,18 +124,14 @@ public class TileFluorescentLight extends TileEntity implements IUpdatePlayerLis
 				i = Math.max(i, worldObj.getRedstonePower(pos.east(), EnumFacing.EAST));
 				i = Math.max(i, worldObj.getRedstonePower(pos.west(), EnumFacing.WEST));
 
-				setPower(i);
+				setPower(Math.max(i, lightPower - 1));
 			}
-
-			IBlockState state = worldObj.getBlockState(pos);
 
 			if(state.getBlock() instanceof BlockNineFluorescentLight) {
 
-				BlockNineFluorescentLight block = (BlockNineFluorescentLight) state.getBlock();
-
 				if(!worldObj.isBlockPowered(pos)) {
 
-					setPower(block.getLightPowered(worldObj, pos) - 1);
+					setPower(lightPower - 1);
 				}
 
 				NineLightColor defCol = getDefaultColor();

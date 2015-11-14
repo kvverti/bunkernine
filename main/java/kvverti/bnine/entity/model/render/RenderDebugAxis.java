@@ -15,7 +15,7 @@ import kvverti.bnine.init.Meta;
 @SideOnly(Side.CLIENT)
 public class RenderDebugAxis extends Render {
 
-	private static final ResourceLocation axis = new ResourceLocation(Meta.ID + ":textures/entity/axis.png");
+	private static final ResourceLocation AXIS = new ResourceLocation(Meta.ID + ":textures/entity/axis.png");
 	private ModelBase model = new ModelDebugAxis();
 
 	public RenderDebugAxis(RenderManager manager) {
@@ -37,6 +37,6 @@ public class RenderDebugAxis extends Render {
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 
-		return axis;
+		return AXIS;
 	}
 }

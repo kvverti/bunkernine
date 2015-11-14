@@ -17,7 +17,7 @@ import kvverti.bnine.init.Meta;
 @SideOnly(Side.CLIENT)
 public class RenderWitherStump extends RenderLiving {
 
-	private static final ResourceLocation stumpTexture = new ResourceLocation(Meta.ID + ":textures/entity/witherStump.png");
+	private static final ResourceLocation STUMP_TEX = new ResourceLocation(Meta.ID + ":textures/entity/splootch.png");
 
 	public RenderWitherStump(RenderManager manager, ModelBase model, float shadowSize) {
 
@@ -39,6 +39,6 @@ public class RenderWitherStump extends RenderLiving {
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 
-		return stumpTexture;
+		return STUMP_TEX;
 	}
 }

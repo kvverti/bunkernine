@@ -31,19 +31,16 @@ public class Registry {
 	public static void registerBlock(Block block) {
 
 		GameRegistry.registerBlock(block, ((StringID) block).id());
-		Logger.trace("Registered block %s", ((StringID) block).id());
 	}
 
 	public static void registerBlock(Block block, Class<? extends ItemBlock> clazz) {
 
 		GameRegistry.registerBlock(block, clazz, ((StringID) block).id());
-		Logger.trace("Registered block %s", ((StringID) block).id());
 	}
 
 	public static void registerBlock(Block block, Class<? extends ItemBlock> clazz, Object... args) {
 
 		GameRegistry.registerBlock(block, clazz, ((StringID) block).id(), args);
-		Logger.trace("Registered block %s", ((StringID) block).id());
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -55,7 +52,6 @@ public class Registry {
 	public static void registerItem(Item item) {
 
 		GameRegistry.registerItem(item, ((StringID) item).id());
-		Logger.trace("Registered item %s", ((StringID) item).id());
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -69,7 +65,6 @@ public class Registry {
 
 		Item item = Item.getItemFromBlock(block);
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(Meta.ID + ":" + ((StringID) block).id(), "inventory"));
-		Logger.trace("Registered item renderer for %s", ((StringID) block).id());
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -82,13 +77,11 @@ public class Registry {
 	public static void registerItemRenderer(Item item, int meta) {
 
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, meta, new ModelResourceLocation(Meta.ID + ":" + ((StringID) item).id(), "inventory"));
-		Logger.trace("Registered item renderer for %s", ((StringID) item).id());
 	}
 
 	public static void registerTileEntity(Class<? extends TileEntity> clazz) {
 
 		GameRegistry.registerTileEntity(clazz, clazz.getAnnotation(ClassID.class).value());
-		Logger.trace("Registered tile entity %s", clazz.getSimpleName());
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -108,13 +101,11 @@ public class Registry {
 	public static void registerEntity(Class<? extends Entity> clazz) {
 
 		EntityRegistry.registerModEntity(clazz, clazz.getAnnotation(ClassID.class).value(), entID++, BunkerNine.instance, 64, 3, false);
-		Logger.trace("Registered entity %s", clazz.getSimpleName());
 	}
 
 	@SideOnly(Side.CLIENT)
 	public static void registerEntityRenderer(Class<? extends Entity> clazz, Render renderer) {
 
 		RenderingRegistry.registerEntityRenderingHandler(clazz, renderer);
-		Logger.trace("Registered entity renderer for %s", clazz.getSimpleName());
 	}
 }

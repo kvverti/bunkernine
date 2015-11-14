@@ -373,7 +373,6 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 	public byte checkPower(World world, BlockPos pos, EnumFacing side) {
 
 		TileEntity tile = world.getTileEntity(pos.offset(side));
-		TileFluorescentLight thisTile = (TileFluorescentLight) world.getTileEntity(pos);
 
 		if(canConnectTo(world, pos, side)) {
 

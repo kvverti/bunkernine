@@ -109,7 +109,7 @@ public class BlockNineLeaves extends BlockLeaves implements StringID {
 	@Override
 	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 
-		return new ArrayList<ItemStack>(Arrays.asList(new ItemStack(this, 1, 0)));
+		return Arrays.asList(new ItemStack(this, 1, 0));
 	}
 
 	@Override

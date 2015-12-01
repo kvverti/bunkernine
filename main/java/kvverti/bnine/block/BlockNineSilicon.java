@@ -17,7 +17,7 @@ import kvverti.bnine.util.Logger;
 
 public class BlockNineSilicon extends BlockNine {
 
-	public static final PropertyInteger POWER = PropertyInteger.create("power", 0, 4);
+	public static final IProperty POWER = PropertyInteger.create("power", 0, 4);
 
 	public BlockNineSilicon(String id) {
 

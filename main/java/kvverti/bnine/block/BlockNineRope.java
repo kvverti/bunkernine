@@ -15,7 +15,8 @@ import net.minecraft.util.AxisAlignedBB;
 
 public class BlockNineRope extends BlockNine {
 
-	public static final PropertyEnum SEGMENT = PropertyEnum.create("segment", VerticalSegment.class);
+	public static final IProperty UP = PropertyBool.create("up");
+	public static final IProperty DOWN = PropertyBool.create("down");
 
 	public BlockNineRope(String id, Material material) {
 
@@ -23,13 +24,13 @@ public class BlockNineRope extends BlockNine {
 		setIsOpaqueCube(false);
 		setIsFullCube(false);
 		setLightOpacity(0);
-		setDefaultState(blockState.getBaseState().withProperty(SEGMENT, VerticalSegment.NONE));
+		setDefaultState(blockState.getBaseState().withProperty(UP, false).withProperty(DOWN, false));
 	}
 
 	@Override
 	public BlockState createBlockState() {
 
-		return new BlockState(this, new IProperty[] { SEGMENT });
+		return new BlockState(this, new IProperty[] { UP, DOWN });
 	}
 
 	@Override
@@ -50,18 +51,8 @@ public class BlockNineRope extends BlockNine {
 		boolean up = world.getBlockState(pos.up()).getBlock() == this;
 		boolean down = world.getBlockState(pos.down()).getBlock() == this;
 
-		if(up && down) {
-
-			state = state.withProperty(SEGMENT, VerticalSegment.MIDDLE);
-
-		} else if(up) {
-
-			state = state.withProperty(SEGMENT, VerticalSegment.BOTTOM);
-
-		} else if(down) {
-
-			state = state.withProperty(SEGMENT, VerticalSegment.TOP);
-		}
+		if(up) state = state.withProperty(UP, true);
+		if(down) state = state.withProperty(DOWN, true);
 		return state;
 	}
 
@@ -98,32 +89,5 @@ public class BlockNineRope extends BlockNine {
 
 		setBlockBoundsBasedOnState(world, pos);
 		return super.getCollisionBoundingBox(world, pos, state);
-	}
-
-	public static enum VerticalSegment implements IStringSerializable {
-
-		TOP	("top"),
-		MIDDLE	("middle"),
-		BOTTOM	("bottom"),
-		NONE	("none");
-
-		private final String name;
-
-		private VerticalSegment(String s) {
-
-			name = s;
-		}
-
-		@Override
-		public String getName() {
-
-			return name;
-		}
-
-		@Override
-		public String toString() {
-
-			return name;
-		}
 	}
 }

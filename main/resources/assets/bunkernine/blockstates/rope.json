@@ -1,8 +1,8 @@
 {
 	"variants": {
-		"segment=none": { "model": "bunkernine:rope_half" },
-		"segment=top": { "model": "bunkernine:rope_whole" },
-		"segment=middle": { "model": "bunkernine:rope_whole" },
-		"segment=bottom": { "model": "bunkernine:rope_half" }
+		"down=false,up=false": { "model": "bunkernine:rope_half" },
+		"down=false,up=true": { "model": "bunkernine:rope_half" },
+		"down=true,up=false": { "model": "bunkernine:rope_whole" },
+		"down=true,up=true": { "model": "bunkernine:rope_whole" }
 	}
 }

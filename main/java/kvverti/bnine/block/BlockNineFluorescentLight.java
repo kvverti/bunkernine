@@ -29,11 +29,11 @@ import kvverti.bnine.item.NineLightColor;
 
 public class BlockNineFluorescentLight extends BlockNine implements ITileEntityProvider {
 
-	public static final PropertyDirection FACING = PropertyDirection.create("facing");
-	public static final PropertyBool NORTH = PropertyBool.create("top");
-	public static final PropertyBool SOUTH = PropertyBool.create("bottom");
-	public static final PropertyBool WEST = PropertyBool.create("left");
-	public static final PropertyBool EAST = PropertyBool.create("right");
+	public static final IProperty FACING = PropertyDirection.create("facing");
+	public static final IProperty NORTH = PropertyBool.create("top");
+	public static final IProperty SOUTH = PropertyBool.create("bottom");
+	public static final IProperty WEST = PropertyBool.create("left");
+	public static final IProperty EAST = PropertyBool.create("right");
 
 	private boolean isLit = false;
 
@@ -414,6 +414,7 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 				tag.removeTag("z");
 				tag.removeTag("id");
 				tag.removeTag("Power");
+				tag.removeTag("Color");
 
 				stack.setTagInfo("BlockEntityTag", tag);
 			}
@@ -451,6 +452,7 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 				tag.removeTag("z");
 				tag.removeTag("id");
 				tag.removeTag("Power");
+				tag.removeTag("Color");
 
 				stack.setTagInfo("BlockEntityTag", tag);
 			}

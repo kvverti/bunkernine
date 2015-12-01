@@ -38,9 +38,6 @@ public class TileFluorescentLight extends TileEntity implements IUpdatePlayerLis
 
 	public byte getPower() {
 
-		if(power < 0) return (byte) 0;
-		if(power > 15) return (byte) 15;
-
 		return power;
 	}
 
@@ -54,9 +51,6 @@ public class TileFluorescentLight extends TileEntity implements IUpdatePlayerLis
 
 	public int getColor() {
 
-		if(color < 0x0) return 0x0;
-		if(color > 0xffffff) return 0xffffff;
-
 		return color;
 	}
 
@@ -68,7 +62,6 @@ public class TileFluorescentLight extends TileEntity implements IUpdatePlayerLis
 
 	public NineLightColor getDefaultColor() {
 
-		if(defaultColor == null) return NineLightColor.NULL;
 		return defaultColor;
 	}
 
@@ -115,39 +108,26 @@ public class TileFluorescentLight extends TileEntity implements IUpdatePlayerLis
 			BlockNineFluorescentLight block = (BlockNineFluorescentLight) state.getBlock();
 			byte lightPower = block.getLightPowered(worldObj, pos);
 
-			if(worldObj.isBlockPowered(pos)) {
+			int i = worldObj.getRedstonePower(pos.down(), EnumFacing.DOWN);
+			i = Math.max(i, worldObj.getRedstonePower(pos.up(), EnumFacing.UP));
+			i = Math.max(i, worldObj.getRedstonePower(pos.north(), EnumFacing.NORTH));
+			i = Math.max(i, worldObj.getRedstonePower(pos.south(), EnumFacing.SOUTH));
+			i = Math.max(i, worldObj.getRedstonePower(pos.east(), EnumFacing.EAST));
+			i = Math.max(i, worldObj.getRedstonePower(pos.west(), EnumFacing.WEST));
 
-				int i = worldObj.getRedstonePower(pos.down(), EnumFacing.DOWN);
-				i = Math.max(i, worldObj.getRedstonePower(pos.up(), EnumFacing.UP));
-				i = Math.max(i, worldObj.getRedstonePower(pos.north(), EnumFacing.NORTH));
-				i = Math.max(i, worldObj.getRedstonePower(pos.south(), EnumFacing.SOUTH));
-				i = Math.max(i, worldObj.getRedstonePower(pos.east(), EnumFacing.EAST));
-				i = Math.max(i, worldObj.getRedstonePower(pos.west(), EnumFacing.WEST));
+			setPower(Math.max(i, lightPower - 1));
 
-				setPower(Math.max(i, lightPower - 1));
-			}
+			NBTTagCompound tag = new NBTTagCompound();
+			writeToNBT(tag);
+			if(getPower() == 0 && block.isLit()) {
 
-			if(state.getBlock() instanceof BlockNineFluorescentLight) {
+				worldObj.setBlockState(pos, block.getUnlitState(state));
+				worldObj.getTileEntity(pos).readFromNBT(tag);
 
-				if(!worldObj.isBlockPowered(pos)) {
+			} else if(getPower() != 0 && !block.isLit()) {
 
-					setPower(lightPower - 1);
-				}
-
-				NineLightColor defCol = getDefaultColor();
-				int col = getColor();
-				if(getPower() == 0 && block.isLit()) {
-
-					worldObj.setBlockState(pos, block.getUnlitState(state));
-					((TileFluorescentLight) worldObj.getTileEntity(pos)).setDefaultColor(defCol);
-					((TileFluorescentLight) worldObj.getTileEntity(pos)).setColor(col);
-
-				} else if(getPower() != 0 && !block.isLit()) {
-
-					worldObj.setBlockState(pos, block.getLitState(state));
-					((TileFluorescentLight) worldObj.getTileEntity(pos)).setDefaultColor(defCol);
-					((TileFluorescentLight) worldObj.getTileEntity(pos)).setColor(col);
-				}
+				worldObj.setBlockState(pos, block.getLitState(state));
+				worldObj.getTileEntity(pos).readFromNBT(tag);
 			}
 		}
 	}

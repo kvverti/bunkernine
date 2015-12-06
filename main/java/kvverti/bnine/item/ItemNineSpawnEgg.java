@@ -30,8 +30,8 @@ import kvverti.bnine.util.StringID;
 
 public class ItemNineSpawnEgg extends ItemNine {
 
-	static final List<Class<? extends Entity>> ENTITY_TYPES = new ArrayList<Class<? extends Entity>>(16);
-	static final Map<Class<? extends Entity>, String> ENTITY_NAMES = new HashMap<Class<? extends Entity>, String>(16);
+	static final List<Class<? extends Entity>> ENTITY_TYPES = new ArrayList<>(16);
+	static final Map<Class<? extends Entity>, String> ENTITY_NAMES = new HashMap<>(16);
 
 	public static void addEntity(Class<? extends Entity> clazz) {
 
@@ -63,15 +63,7 @@ public class ItemNineSpawnEgg extends ItemNine {
 	public int getColorFromItemStack(ItemStack stack, int renderpass) {
 
 		String entityName = ENTITY_NAMES.get(ENTITY_TYPES.get(stack.getMetadata())).toLowerCase();
-		String color = Resources.INSTANCE.getColorEgg(entityName, renderpass);
-
-		try {
-			return Integer.parseInt(color, 16);
-
-		} catch(NumberFormatException e) {
-
-			return 0xffffff;
-		}
+		return Resources.INSTANCE.getColorEgg(entityName, renderpass);
 	}
 
 	@Override

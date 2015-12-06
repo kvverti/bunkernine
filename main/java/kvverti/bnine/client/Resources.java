@@ -25,38 +25,44 @@ import kvverti.bnine.util.Logger;
 @SideOnly(Side.CLIENT)
 public class Resources implements IResourceManagerReloadListener {
 
+	//block keys are the internal ID of the block, in lowercase
 	private static final String[] BLOCK_KEYS = { "mazewood_leaves" };
+	//egg keys are the internal name of the entity, in lowercase
 	private static final String[] EGG_KEYS = { "witherstump" };
 	private static final ResourceLocation COLORS = new ResourceLocation(Meta.ID + ":colors.json");
 
-	private Map<NineLightColor, String> colorsFluorescent = new EnumMap<NineLightColor, String>(NineLightColor.class);
-	private Map<String, String> colorsBlock = new HashMap<String, String>(16);
-	private Map<String, String> colorsEggPrimary = new HashMap<String, String>(16);
-	private Map<String, String> colorsEggSecondary = new HashMap<String, String>(16);
+	private Map<NineLightColor, String> colorsFluorescent = new EnumMap<>(NineLightColor.class);
+	private Map<String, String> colorsBlock = new HashMap<>(16);
+	private Map<String, String[]> colorsEgg = new HashMap<>(16);
 
 	public static final Resources INSTANCE = new Resources();
 
-	private Resources() {
+	private Resources() { }
 
-		super();
+	private int parseInt(String value, int radix, int _default) {
+
+		try {
+			return Integer.parseInt(value, radix);
+
+		} catch(NumberFormatException e) {
+
+			return _default;
+		}
 	}
 
-	public String getColorFluorescent(NineLightColor color) {
+	public int getColorFluorescent(NineLightColor color) {
 
-		return colorsFluorescent.get(color);
+		return parseInt(colorsFluorescent.get(color), 16, 0xffffff);
 	}
 
-	public String getColorFoliage(String id) {
+	public int getColorBlock(String id) {
 
-		return colorsBlock.get(id);
+		return parseInt(colorsBlock.get(id), 16, 0xffffff);
 	}
 
-	public String getColorEgg(String entity, int pass) {
+	public int getColorEgg(String entity, int pass) {
 
-		if(pass == 0) return colorsEggPrimary.get(entity);
-		if(pass == 1) return colorsEggSecondary.get(entity);
-
-		return "ffffff";
+		return parseInt(colorsEgg.get(entity)[pass], 16, 0xffffff);
 	}
 
 	@Override
@@ -72,8 +78,6 @@ public class Resources implements IResourceManagerReloadListener {
 	@SuppressWarnings("unchecked")
 	private void reloadColorsResource(IResourceManager manager) {
 
-		InputStream in = null;
-		BufferedReader reader = null;
 		List<IResource> allColors = null;
 
 		try {
@@ -81,65 +85,74 @@ public class Resources implements IResourceManagerReloadListener {
 
 		} catch(IOException e) { return; }
 
+		clearMaps();
 		for(IResource resource : allColors) {
 
-			try {
-				in = resource.getInputStream();
-				reader = new BufferedReader(new InputStreamReader(in));
+			try(
+			InputStream in = resource.getInputStream();
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in))
+			) {
 				JsonObject json = new Gson().fromJson(reader, JsonElement.class).getAsJsonObject();
-				JsonElement colElem;
 
-				JsonObject colorObject = json.getAsJsonObject("fluorescent");
-				if(colorObject != null) {
-
-					for(NineLightColor c : NineLightColor.values()) {
-
-						colElem = colorObject.get(c.getName());
-						if(colElem != null && colElem.isJsonPrimitive()) {
-
-							colorsFluorescent.put(c, colElem.getAsString());
-						}
-					}
-				}
-
-				colorObject = json.getAsJsonObject("block");
-				if(colorObject != null) {
-
-					for(String s : BLOCK_KEYS) {
-
-						colElem = colorObject.get(s);
-						if(colElem != null && colElem.isJsonPrimitive()) {
-
-							colorsBlock.put(s, colElem.getAsString());
-						}
-					}
-				}
-
-				colorObject = json.getAsJsonObject("egg");
-				if(colorObject != null) {
-
-					for(String s : EGG_KEYS) {
-
-						colElem = colorObject.get(s);
-						if(colElem != null && colElem.isJsonArray()) {
-
-							colorsEggPrimary.put(s, ((JsonArray) colElem).get(0).getAsString());
-							colorsEggSecondary.put(s, ((JsonArray) colElem).get(1).getAsString());
-						}
-					}
-				}
+				fillMap(json.getAsJsonObject("fluorescent"), NineLightColor.values(), colorsFluorescent);
+				fillMap(json.getAsJsonObject("block"), BLOCK_KEYS, colorsBlock);
+				fillMapWithArray(json.getAsJsonObject("egg"), EGG_KEYS, colorsEgg);
 
 			} catch(RuntimeException e) {
 
-				Logger.error("Caught exception reading resource file (%s); aborting this iteration", e);
+				Logger.error(e, "Caught exception reading resource file:");
 
-			} finally {
+			  //thrown by close()
+			} catch(IOException e) {
 
-				try {
-					if(reader != null) reader.close();
-					if(in != null) in.close();
+				Logger.warn("IO-error occured closing file");
+			}
+		}
+	}
 
-				} catch(IOException ex) { }
+	private void clearMaps() {
+
+		colorsFluorescent.clear();
+		colorsBlock.clear();
+		colorsEgg.clear();
+	}
+
+	private <T> void fillMap(JsonObject object, T[] keys, Map<T, String> map) {
+
+		if(object != null) {
+
+			JsonElement elem;
+			for(T t : keys) {
+
+				elem = object.get(String.valueOf(t));
+				if(elem != null && elem.isJsonPrimitive()) {
+
+					map.put(t, elem.getAsString());
+				}
+			}
+		}
+	}
+
+	private <T> void fillMapWithArray(JsonObject object, T[] keys, Map<T, String[]> map) {
+
+		if(object != null) {
+
+			JsonElement elem;
+			String[] array;
+			int length;
+			for(T t : keys) {
+
+				elem = object.get(String.valueOf(t));
+				if(elem != null && elem.isJsonArray()) {
+
+					length = elem.getAsJsonArray().size();
+					array = new String[length];
+					for(int i = 0; i < length; i++) {
+
+						array[i] = elem.getAsJsonArray().get(i).getAsString();
+					}
+					map.put(t, array);
+				}
 			}
 		}
 	}

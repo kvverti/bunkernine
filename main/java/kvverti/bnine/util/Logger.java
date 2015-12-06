@@ -28,6 +28,11 @@ public class Logger {
 		log(Level.ERROR, message, args);
 	}
 
+	public static void error(Throwable error, String message, Object... args) {
+
+		FMLLog.log(Meta.NAME, Level.ERROR, error, message, args);
+	}
+
 	public static void debug(String message, Object... args) {
 
 		log(Level.DEBUG, message, args);

@@ -61,13 +61,13 @@ public class BlockNineLog extends BlockLog implements StringID {
 
 		int i = 0;
 
-		switch(((EnumAxis) state.getValue(LOG_AXIS)).ordinal()) {
+		switch((EnumAxis) state.getValue(LOG_AXIS)) {
 
-			case 0: i |= 4;
+			case X: i |= 4;
 				break;
-			case 2: i |= 8;
+			case Z: i |= 8;
 				break;
-			case 3: i |= 12;
+			case NONE: i |= 12;
 		}
 
 		return i;

@@ -70,14 +70,7 @@ public class BlockNineLeaves extends BlockLeaves implements StringID {
 	@SideOnly(Side.CLIENT)
 	public int getBlockColor() {
 
-		String col = Resources.INSTANCE.getColorFoliage(id());
-		try {
-			return Integer.parseInt(col, 16);
-
-		} catch(NumberFormatException e) {
-
-			return 0xffffff;
-		}
+		return Resources.INSTANCE.getColorBlock(id());
 	}
 
 	@Override

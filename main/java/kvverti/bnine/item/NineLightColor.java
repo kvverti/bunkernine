@@ -56,14 +56,7 @@ public enum NineLightColor implements IStringSerializable {
 	@SideOnly(Side.CLIENT)
 	public int getClientColor() {
 
-		String col = Resources.INSTANCE.getColorFluorescent(this);
-		try {
-			return Integer.parseInt(col, 16);
-
-		} catch(NumberFormatException e) {
-
-			return 0xffffff;
-		}
+		return Resources.INSTANCE.getColorFluorescent(this);
 	}
 
 	public static NineLightColor byMetadata(int meta) {

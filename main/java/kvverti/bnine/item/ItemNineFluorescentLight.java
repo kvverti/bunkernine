@@ -21,6 +21,9 @@ import kvverti.bnine.block.BlockNineFluorescentLight;
 import kvverti.bnine.block.NineBlocks;
 import kvverti.bnine.block.entity.TileFluorescentLight;
 
+import static kvverti.bnine.item.NineLightColor.*;
+import static kvverti.bnine.block.entity.TileFluorescentLight.*;
+
 public class ItemNineFluorescentLight extends ItemBlock {
 
 	public ItemNineFluorescentLight(Block block) {
@@ -36,9 +39,9 @@ public class ItemNineFluorescentLight extends ItemBlock {
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List subItems) {
 
-		for(int i = 0; i <= NineLightColor.MAX_ORDINAL; i++) {
+		for(int i = 0; i <= MAX_ORDINAL; i++) {
 
-			if(!NineLightColor.isUsedValue(i)) continue;
+			if(!isUsedValue(i)) continue;
 			subItems.add(new ItemStack(item, 1, i));
 		}
 	}
@@ -62,7 +65,11 @@ public class ItemNineFluorescentLight extends ItemBlock {
 
 			pos = pos.offset(side);
 			world.setBlockState(pos, block.getDefaultState().withProperty(BlockNineFluorescentLight.FACING, side));
-			world.playSoundEffect(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, block.stepSound.getPlaceSound(), (block.stepSound.getVolume() + 1.0f) / 2.0f, block.stepSound.getFrequency() * 0.8f);
+			world.playSoundEffect(
+				pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+				block.stepSound.getPlaceSound(), (block.stepSound.getVolume() + 1.0f) / 2.0f,
+				block.stepSound.getFrequency() * 0.8f
+			);
 			stack.stackSize--;
 
 			TileEntity tile = world.getTileEntity(pos);
@@ -78,28 +85,18 @@ public class ItemNineFluorescentLight extends ItemBlock {
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack stack, int renderPass) {
 
-		if(stack.hasTagCompound() && stack.getTagCompound().hasKey("BlockEntityTag", 10)) {
+		NBTTagCompound tag = stack.getSubCompound("BlockEntityTag", true);
+		NineLightColor col = byName(tag.getString(COLOR));
 
-			NBTTagCompound tag = stack.getTagCompound().getCompoundTag("BlockEntityTag");
-
-			if(tag.hasKey(TileFluorescentLight.COLOR, 8)) {
-
-				NineLightColor col = NineLightColor.byName(tag.getString(TileFluorescentLight.COLOR));
-
-				if(col != NineLightColor.NULL) return col.getClientColor();
-			}
-			if(tag.hasKey(TileFluorescentLight.CUSTOM_COLOR, 3)) {
-
-				return tag.getInteger(TileFluorescentLight.CUSTOM_COLOR);
-			}
-		}
-		return NineLightColor.byMetadata(stack.getMetadata()).getClientColor();
+		return col != NULL ? col.getClientColor()
+			: tag.hasKey(CUSTOM_COLOR, 3) ? tag.getInteger(CUSTOM_COLOR)
+			: byMetadata(stack.getMetadata()).getClientColor();
 	}
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 
-		NineLightColor color = NineLightColor.byMetadata(stack.getMetadata());
+		NineLightColor color = byMetadata(stack.getMetadata());
 		return "tile.fluorescentLight." + color;
 	}
 
@@ -108,30 +105,10 @@ public class ItemNineFluorescentLight extends ItemBlock {
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List toolclip, boolean advanced) {
 
-		NBTTagCompound tag = stack.getSubCompound("BlockEntityTag", false);
-
 		if(advanced) {
 
-			if(tag != null) {
-
-				if(tag.hasKey(TileFluorescentLight.COLOR)) {
-
-					NineLightColor c = NineLightColor.byName(tag.getString(TileFluorescentLight.COLOR));
-
-					if(c != NineLightColor.NULL) {
-
-						toolclip.add(1, "Color: " + Integer.toHexString(c.getClientColor()).toUpperCase());
-						return;
-					}
-				}
-				if(tag.hasKey(TileFluorescentLight.CUSTOM_COLOR)) {
-
-					toolclip.add(1, "Color: " + Integer.toHexString(tag.getInteger(TileFluorescentLight.CUSTOM_COLOR)).toUpperCase());
-					return;
-				}
-
-			}
-			toolclip.add(1, "Color: " + Integer.toHexString(NineLightColor.byMetadata(stack.getMetadata()).getClientColor()).toUpperCase());
+			int hexColor = getColorFromItemStack(stack, 0);
+			toolclip.add(1, "Color: " + Integer.toHexString(hexColor).toUpperCase());
 		}
 	}
 }

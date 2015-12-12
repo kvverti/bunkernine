@@ -62,7 +62,8 @@ public class Resources implements IResourceManagerReloadListener {
 
 	public int getColorEgg(String entity, int pass) {
 
-		return parseInt(colorsEgg.get(entity)[pass], 16, 0xffffff);
+		String[] s = colorsEgg.get(entity);
+		return parseInt(pass < s.length ? s[pass] : s[0], 16, 0xffffff);
 	}
 
 	@Override

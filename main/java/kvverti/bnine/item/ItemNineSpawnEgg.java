@@ -31,13 +31,15 @@ import kvverti.bnine.util.StringID;
 public class ItemNineSpawnEgg extends ItemNine {
 
 	static final List<Class<? extends Entity>> ENTITY_TYPES = new ArrayList<>(16);
-	static final Map<Class<? extends Entity>, String> ENTITY_NAMES = new HashMap<>(16);
+	static final List<String> ENTITY_NAMES = new ArrayList<>(16);
 
 	public static void addEntity(Class<? extends Entity> clazz) {
 
-		if(ENTITY_TYPES.indexOf(clazz) == -1) ENTITY_TYPES.add(clazz);
+		if(!ENTITY_TYPES.contains(clazz)) {
 
-		ENTITY_NAMES.putIfAbsent(clazz, clazz.getAnnotation(ClassID.class).value());
+			ENTITY_TYPES.add(clazz);
+			ENTITY_NAMES.add(clazz.getAnnotation(ClassID.class).value());
+		}
 	}
 
 	public ItemNineSpawnEgg(String id) {
@@ -62,7 +64,7 @@ public class ItemNineSpawnEgg extends ItemNine {
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack stack, int renderpass) {
 
-		String entityName = ENTITY_NAMES.get(ENTITY_TYPES.get(stack.getMetadata())).toLowerCase();
+		String entityName = ENTITY_NAMES.get(stack.getMetadata()).toLowerCase();
 		return Resources.INSTANCE.getColorEgg(entityName, renderpass);
 	}
 
@@ -70,13 +72,11 @@ public class ItemNineSpawnEgg extends ItemNine {
 	public String getItemStackDisplayName(ItemStack stack) {
 
 		String eggBaseName = getUnlocalizedName() + ".name";
-		String entityName = ""; //localized name
-
-		if(stack.getMetadata() < ENTITY_TYPES.size()) {
-
-			Class<? extends Entity> entityClass = ENTITY_TYPES.get(stack.getMetadata());
-			entityName = StatCollector.translateToLocal("entity." + Meta.ID + "." + ENTITY_NAMES.get(entityClass) + ".name");
-		}
+		String entityName = stack.getMetadata() < ENTITY_TYPES.size() ?
+			StatCollector.translateToLocal(
+				"entity." + Meta.ID + "."
+				+ ENTITY_NAMES.get(stack.getMetadata()) + ".name"
+			) : "Nothing";
 
 		return StatCollector.translateToLocalFormatted(eggBaseName, entityName);
 	}

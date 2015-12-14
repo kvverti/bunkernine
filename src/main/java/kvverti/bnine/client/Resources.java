@@ -147,7 +147,7 @@ public class Resources implements IResourceManagerReloadListener {
 				if(elem != null && elem.isJsonArray()) {
 
 					length = elem.getAsJsonArray().size();
-					array = new String[length];
+					array = new String[length > 0 ? length : 1];
 					for(int i = 0; i < length; i++) {
 
 						array[i] = elem.getAsJsonArray().get(i).getAsString();

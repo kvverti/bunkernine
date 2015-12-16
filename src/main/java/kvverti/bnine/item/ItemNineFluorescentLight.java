@@ -89,7 +89,7 @@ public class ItemNineFluorescentLight extends ItemBlock {
 		NineLightColor col = tag != null ? byName(tag.getString(COLOR)) : NULL;
 
 		return col != NULL ? col.getClientColor()
-			: tag.hasKey(CUSTOM_COLOR, 3) ? tag.getInteger(CUSTOM_COLOR)
+			: tag != null && tag.hasKey(CUSTOM_COLOR, 3) ? tag.getInteger(CUSTOM_COLOR)
 			: byMetadata(stack.getMetadata()).getClientColor();
 	}
 

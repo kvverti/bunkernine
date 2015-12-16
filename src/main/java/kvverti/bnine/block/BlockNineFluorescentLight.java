@@ -81,22 +81,12 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 	@SideOnly(Side.CLIENT)
 	public int colorMultiplier(IBlockAccess world, BlockPos pos, int renderPass) {
 
-		TileEntity te = world.getTileEntity(pos);
+		if(world.getTileEntity(pos) instanceof TileFluorescentLight) {
 
-		if(te instanceof TileFluorescentLight) {
+			TileFluorescentLight te = (TileFluorescentLight) world.getTileEntity(pos);
+			NineLightColor c = te.getDefaultColor();
 
-			NineLightColor c = ((TileFluorescentLight) te).getDefaultColor();
-
-			int color;
-			if(c != NineLightColor.NULL) {
-
-				color = c.getClientColor();
-
-			} else {
-
-				color = ((TileFluorescentLight) te).getColor();
-			}
-
+			int color = c != NineLightColor.NULL ? c.getClientColor() : te.getColor();
 			if(!isLit) {
 
 				int r = (color & 0xff0000) / 3;
@@ -201,26 +191,19 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 
 		IBlockState offset = world.getBlockState(pos.offset(dir));
 
-		return offset.getBlock() instanceof BlockNineFluorescentLight && world.getBlockState(pos).getValue(FACING) == offset.getValue(FACING);
+		return offset.getBlock() instanceof BlockNineFluorescentLight
+			&& world.getBlockState(pos).getValue(FACING) == offset.getValue(FACING);
 	}
 
 	public byte getLightPowered(World world, BlockPos pos) {
 
-		byte level = 0;
+		byte level = checkPower(world, pos, EnumFacing.DOWN);
 
-		byte down = checkPower(world, pos, EnumFacing.DOWN);
-		byte up = checkPower(world, pos, EnumFacing.UP);
-		byte north = checkPower(world, pos, EnumFacing.NORTH);
-		byte south = checkPower(world, pos, EnumFacing.SOUTH);
-		byte west = checkPower(world, pos, EnumFacing.WEST);
-		byte east = checkPower(world, pos, EnumFacing.EAST);
-
-		if(down > level) level = down;
-		if(up > level) level = up;
-		if(north > level) level = north;
-		if(south > level) level = south;
-		if(west > level) level = west;
-		if(east > level) level = east;
+		level = (byte) Math.max(level, checkPower(world, pos, EnumFacing.UP));
+		level = (byte) Math.max(level, checkPower(world, pos, EnumFacing.NORTH));
+		level = (byte) Math.max(level, checkPower(world, pos, EnumFacing.SOUTH));
+		level = (byte) Math.max(level, checkPower(world, pos, EnumFacing.WEST));
+		level = (byte) Math.max(level, checkPower(world, pos, EnumFacing.EAST));
 
 		return level;
 	}
@@ -228,8 +211,10 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 	@Override
 	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighbor) {
 
-		if(!world.getBlockState(pos.offset(((EnumFacing) state.getValue(FACING)).getOpposite())).getBlock().isOpaqueCube()) {
-
+		if(
+		!world.getBlockState(pos.offset(((EnumFacing) state.getValue(FACING)).getOpposite()))
+		.getBlock().isOpaqueCube()
+		) {
 			dropBlockAsItem(world, pos, state, 0);
 			world.setBlockToAir(pos);
 		}
@@ -373,7 +358,6 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 	public byte checkPower(World world, BlockPos pos, EnumFacing side) {
 
 		TileEntity tile = world.getTileEntity(pos.offset(side));
-
 		if(canConnectTo(world, pos, side)) {
 
 			return ((TileFluorescentLight) tile).getPower();
@@ -385,40 +369,10 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 	public void dropBlockAsItemWithChance(World world, BlockPos pos, IBlockState state, float chance, int fortune) {
 
 		if(world.rand.nextFloat() > chance) return;
+		if(world.getTileEntity(pos) instanceof TileFluorescentLight) {
 
-		TileEntity te = world.getTileEntity(pos);
-
-		if(te instanceof TileFluorescentLight) {
-
-			ItemStack stack = null;
-
-			for(NineLightColor color : NineLightColor.values()) {
-
-				if(color == ((TileFluorescentLight) te).getDefaultColor()) {
-
-					if(color != NineLightColor.NULL) {
-
-						stack = new ItemStack(Item.getItemFromBlock(NineBlocks.fluorescentLight), 1, color.getMetadata());
-					}
-				}
-			}
-
-			if(stack == null) {
-
-				stack = new ItemStack(Item.getItemFromBlock(NineBlocks.fluorescentLight), 1, 0);
-				NBTTagCompound tag = new NBTTagCompound();
-				te.writeToNBT(tag);
-
-				tag.removeTag("x");
-				tag.removeTag("y");
-				tag.removeTag("z");
-				tag.removeTag("id");
-				tag.removeTag("Power");
-				tag.removeTag("Color");
-
-				stack.setTagInfo("BlockEntityTag", tag);
-			}
-			spawnAsEntity(world, pos, stack);
+			TileFluorescentLight te = (TileFluorescentLight) world.getTileEntity(pos);
+			spawnAsEntity(world, pos, getDropStack(world, state, te));
 
 		} else super.dropBlockAsItemWithChance(world, pos, state, chance, fortune);
 	}
@@ -428,36 +382,25 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 
 		if(tile instanceof TileFluorescentLight) {
 
-			ItemStack stack = null;
-
-			for(NineLightColor color : NineLightColor.values()) {
-
-				if(color == ((TileFluorescentLight) tile).getDefaultColor()) {
-
-					if(color != NineLightColor.NULL) {
-
-						stack = new ItemStack(Item.getItemFromBlock(NineBlocks.fluorescentLight), 1, color.getMetadata());
-					}
-				}
-			}
-
-			if(stack == null) {
-
-				stack = new ItemStack(Item.getItemFromBlock(NineBlocks.fluorescentLight), 1, 0);
-				NBTTagCompound tag = new NBTTagCompound();
-				tile.writeToNBT(tag);
-
-				tag.removeTag("x");
-				tag.removeTag("y");
-				tag.removeTag("z");
-				tag.removeTag("id");
-				tag.removeTag("Power");
-				tag.removeTag("Color");
-
-				stack.setTagInfo("BlockEntityTag", tag);
-			}
-			spawnAsEntity(world, pos, stack);
+			spawnAsEntity(world, pos, getDropStack(world, state, (TileFluorescentLight) tile));
 
 		} else super.harvestBlock(world, player, pos, state, null);
+	}
+
+	private ItemStack getDropStack(World world, IBlockState state, TileFluorescentLight te) {
+
+		NineLightColor color = te.getDefaultColor();
+		ItemStack stack = new ItemStack(
+			getItemDropped(state, world.rand, 0), 1,
+			color != NineLightColor.NULL ? color.getMetadata() : 0
+		);
+
+		if(color == NineLightColor.NULL) {
+
+			NBTTagCompound tag = new NBTTagCompound();
+			tag.setInteger(TileFluorescentLight.CUSTOM_COLOR, te.getColor());
+			stack.setTagInfo("BlockEntityTag", tag);
+		}
+		return stack;
 	}
 }

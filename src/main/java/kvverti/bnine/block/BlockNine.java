@@ -116,7 +116,7 @@ public class BlockNine extends Block implements StringID {
 	@Override
 	public boolean isFlammable(IBlockAccess world, BlockPos pos, EnumFacing face) {
 
-		return face == EnumFacing.UP ? true : flammable;
+		return face == EnumFacing.UP || flammable;
 	}
 
 	public BlockNine setIsFlammable(boolean flam) {
@@ -133,7 +133,7 @@ public class BlockNine extends Block implements StringID {
 
 	public BlockNine setFireSpreadSpeed(int speed) {
 
-		fireSpreadSpeed = speed >= 0 ? speed : 0;
+		fireSpreadSpeed = speed > 0 ? speed : 0;
 		return this;
 	}
 
@@ -145,7 +145,7 @@ public class BlockNine extends Block implements StringID {
 
 	public BlockNine setFlammability(int flam) {
 
-		flammability = flam < 0 ? 0 : (flam > 300 ? 300 : flam);
+		flammability = flam < 0 ? 0 : flam > 300 ? 300 : flam;
 		return this;
 	}
 
@@ -169,6 +169,7 @@ public class BlockNine extends Block implements StringID {
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess world, BlockPos pos, EnumFacing side) {
 
-		return !isOpaqueCube() ? world.getBlockState(pos).getBlock() != this && super.shouldSideBeRendered(world, pos, side) : super.shouldSideBeRendered(world, pos, side);
+		return (isOpaqueCube() || world.getBlockState(pos).getBlock() != this)
+			&& super.shouldSideBeRendered(world, pos, side);
 	}
 }

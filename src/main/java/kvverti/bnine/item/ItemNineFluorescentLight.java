@@ -85,8 +85,8 @@ public class ItemNineFluorescentLight extends ItemBlock {
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack stack, int renderPass) {
 
-		NBTTagCompound tag = stack.getSubCompound("BlockEntityTag", true);
-		NineLightColor col = byName(tag.getString(COLOR));
+		NBTTagCompound tag = stack.getSubCompound("BlockEntityTag", false);
+		NineLightColor col = tag != null ? byName(tag.getString(COLOR)) : NULL;
 
 		return col != NULL ? col.getClientColor()
 			: tag.hasKey(CUSTOM_COLOR, 3) ? tag.getInteger(CUSTOM_COLOR)

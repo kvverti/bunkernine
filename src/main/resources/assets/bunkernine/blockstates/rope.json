@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"down=false,up=false": { "model": "bunkernine:rope_half" },
+		"down=false,up=true": { "model": "bunkernine:rope_half" },
+		"down=true,up=false": { "model": "bunkernine:rope_whole" },
+		"down=true,up=true": { "model": "bunkernine:rope_whole" }
+	}
+}

@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Level;
 
 import kvverti.bnine.init.Meta;
 
-public class Logger {
+public final class Logger {
 
 	public static void log(Level level, String message, Object... args) {
 

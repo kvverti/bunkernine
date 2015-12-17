@@ -1,6 +1,6 @@
 package kvverti.bnine.init;
 
-public class Meta {
+public final class Meta {
 
 	public static final String ID = "bunkernine";
 	public static final String NAME = "Bunker 9";

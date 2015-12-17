@@ -24,7 +24,7 @@ import net.minecraft.tileentity.TileEntity;
 
 import kvverti.bnine.util.*;
 
-public class Registry {
+public final class Registry {
 
 	public static int entID = 0;
 

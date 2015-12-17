@@ -23,7 +23,7 @@ import kvverti.bnine.item.NineLightColor;
 import kvverti.bnine.util.Logger;
 
 @SideOnly(Side.CLIENT)
-public class Resources implements IResourceManagerReloadListener {
+public final class Resources implements IResourceManagerReloadListener {
 
 	//block keys are the internal ID of the block, in lowercase
 	private static final String[] BLOCK_KEYS = { "mazewood_leaves" };
@@ -31,9 +31,9 @@ public class Resources implements IResourceManagerReloadListener {
 	private static final String[] EGG_KEYS = { "witherstump" };
 	private static final ResourceLocation COLORS = new ResourceLocation(Meta.ID + ":colors.json");
 
-	private Map<NineLightColor, String> colorsFluorescent = new EnumMap<>(NineLightColor.class);
-	private Map<String, String> colorsBlock = new HashMap<>(16);
-	private Map<String, String[]> colorsEgg = new HashMap<>(16);
+	private final Map<NineLightColor, String> colorsFluorescent = new EnumMap<>(NineLightColor.class);
+	private final Map<String, String> colorsBlock = new HashMap<>(16);
+	private final Map<String, String[]> colorsEgg = new HashMap<>(16);
 
 	public static final Resources INSTANCE = new Resources();
 

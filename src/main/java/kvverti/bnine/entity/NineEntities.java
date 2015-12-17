@@ -10,7 +10,7 @@ import kvverti.bnine.entity.model.render.*;
 import kvverti.bnine.init.Registry;
 import kvverti.bnine.item.ItemNineSpawnEgg;
 
-public class NineEntities {
+public final class NineEntities {
 
 	public static void register() {
 

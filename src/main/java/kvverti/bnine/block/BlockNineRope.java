@@ -51,8 +51,7 @@ public class BlockNineRope extends BlockNine {
 		boolean up = world.getBlockState(pos.up()).getBlock() == this;
 		boolean down = world.getBlockState(pos.down()).getBlock() == this;
 
-		if(up) state = state.withProperty(UP, true);
-		if(down) state = state.withProperty(DOWN, true);
+		state = state.withProperty(UP, up).withProperty(DOWN, down);
 		return state;
 	}
 
@@ -76,11 +75,7 @@ public class BlockNineRope extends BlockNine {
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess world, BlockPos pos) {
 
-		float y;
-
-		if(world.getBlockState(pos.down()).getBlock() == this) y = 0.0f;
-		else y = 0.5f;
-
+		float y = world.getBlockState(pos.down()).getBlock() == this ? 0.0f : 0.5f;
 		setBlockBounds(0.4375f, y, 0.4375f, 0.5625f, 1.0f, 0.5625f);
 	}
 

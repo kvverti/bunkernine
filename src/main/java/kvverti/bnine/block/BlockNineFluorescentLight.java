@@ -35,7 +35,7 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 	public static final IProperty WEST = PropertyBool.create("left");
 	public static final IProperty EAST = PropertyBool.create("right");
 
-	private boolean isLit = false;
+	private final boolean isLit;
 
 	public BlockNineFluorescentLight(String id, boolean lit) {
 
@@ -48,10 +48,9 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 			.withProperty(WEST, false)
 			.withProperty(EAST, false);
 
-		if(lit) { 
+		if(isLit = lit) {
 
 			setLightLevel(1.0f);
-			isLit = true;
 		}
 		setIsOpaqueCube(false);
 		setIsFullCube(false);

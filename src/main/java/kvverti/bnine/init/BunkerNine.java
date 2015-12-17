@@ -12,7 +12,7 @@ import kvverti.bnine.proxy.Proxy;
 import static kvverti.bnine.init.Meta.*;
 
 @Mod(modid = ID, name = NAME, version = VERSION)
-public class BunkerNine {
+public final class BunkerNine {
 
 	@Instance(ID)
 	public static BunkerNine instance;

@@ -7,16 +7,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.model.*;
 
 @SideOnly(Side.CLIENT)
-public class ModelDebugAxis extends ModelBase {
+public class ModelDebugAxis extends ModelNine {
 
-	private int texWidth = 64;
-	private int texHeight = 32;
-
-	private ModelRenderer x;
-	private ModelRenderer y;
-	private ModelRenderer z;
+	private final ModelRenderer x;
+	private final ModelRenderer y;
+	private final ModelRenderer z;
 
 	public ModelDebugAxis() {
+
+		super(64, 32);
 
 		x = new ModelRenderer(this, 0, 17);
 		x.addBox(0.0f, 0.0f, 0.0f, 16, 1, 1);

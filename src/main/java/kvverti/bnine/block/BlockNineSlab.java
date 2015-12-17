@@ -127,7 +127,7 @@ public abstract class BlockNineSlab extends BlockSlab implements StringID {
 	@Override
 	public boolean isFlammable(IBlockAccess world, BlockPos pos, EnumFacing face) {
 
-		return face == EnumFacing.UP ? true : flammable;
+		return face == EnumFacing.UP || flammable;
 	}
 
 	public BlockNineSlab setIsFlammable(boolean flam) {
@@ -144,7 +144,7 @@ public abstract class BlockNineSlab extends BlockSlab implements StringID {
 
 	public BlockNineSlab setFireSpreadSpeed(int speed) {
 
-		fireSpreadSpeed = speed >= 0 ? speed : 0;
+		fireSpreadSpeed = speed > 0 ? speed : 0;
 		return this;
 	}
 
@@ -156,7 +156,7 @@ public abstract class BlockNineSlab extends BlockSlab implements StringID {
 
 	public BlockNineSlab setFlammability(int flam) {
 
-		flammability = flam < 0 ? 0 : (flam > 300 ? 300 : flam);
+		flammability = flam < 0 ? 0 : flam > 300 ? 300 : flam;
 		return this;
 	}
 }

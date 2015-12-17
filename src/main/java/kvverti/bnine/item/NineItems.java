@@ -9,7 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import kvverti.bnine.block.NineBlocks;
 import kvverti.bnine.init.Registry;
 
-public class NineItems {
+public final class NineItems {
 
 	public static CreativeTabs tabNineItems = new CreativeTabs("nineItems") {
 

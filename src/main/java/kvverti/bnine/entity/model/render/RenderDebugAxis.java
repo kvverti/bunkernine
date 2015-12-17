@@ -16,7 +16,7 @@ import kvverti.bnine.init.Meta;
 public class RenderDebugAxis extends Render {
 
 	private static final ResourceLocation AXIS = new ResourceLocation(Meta.ID + ":textures/entity/axis.png");
-	private ModelBase model = new ModelDebugAxis();
+	private final ModelBase model = new ModelDebugAxis();
 
 	public RenderDebugAxis(RenderManager manager) {
 

@@ -12,7 +12,7 @@ import kvverti.bnine.block.entity.TileFluorescentLight;
 import kvverti.bnine.init.Registry;
 import kvverti.bnine.item.*;
 
-public class NineBlocks {
+public final class NineBlocks {
 
 	public static CreativeTabs tabNineBlocks = new CreativeTabs("nineBlocks") {
 

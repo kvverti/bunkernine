@@ -10,7 +10,7 @@ import net.minecraft.init.Items;
 import kvverti.bnine.block.NineBlocks;
 import kvverti.bnine.item.NineItems;
 
-public class NineRecipes {
+public final class NineRecipes {
 
 	public static void register() {
 

@@ -34,7 +34,7 @@ public class BlockNineLog extends BlockLog implements StringID {
 	@Override
 	public BlockState createBlockState() {
 
-		return new BlockState(this, new IProperty[] { LOG_AXIS });
+		return new BlockState(this, LOG_AXIS);
 	}	
 
 	@Override

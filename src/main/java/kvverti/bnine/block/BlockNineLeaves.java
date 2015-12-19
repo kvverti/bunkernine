@@ -46,7 +46,7 @@ public class BlockNineLeaves extends BlockLeaves implements StringID {
 	@Override
 	public BlockState createBlockState() {
 
-		return new BlockState(this, new IProperty[] { DECAYABLE, CHECK_DECAY });
+		return new BlockState(this, DECAYABLE, CHECK_DECAY);
 	}
 
 	@Override

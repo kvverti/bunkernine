@@ -102,7 +102,7 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 	@Override
 	public BlockState createBlockState() {
 
-		return new BlockState(this, new IProperty[] { FACING, NORTH, SOUTH, WEST, EAST });
+		return new BlockState(this, FACING, NORTH, SOUTH, WEST, EAST);
 	}
 
 	@Override

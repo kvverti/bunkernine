@@ -25,6 +25,7 @@ public enum NineLightColor implements IStringSerializable {
 	PEACH		(16, "peach"	),
 	NULL		(-1, "null"	);
 
+	//The maximum metadata value
 	public static final int MAX_ORDINAL = 16;
 
 	private final int index;
@@ -79,10 +80,12 @@ public enum NineLightColor implements IStringSerializable {
 		return NULL;
 	}
 
+	/*
+	 * Returns whether the given int is used as a metadata value.
+	 * -1, the meta value of NULL, will return false.
+	 */
 	public static boolean isUsedValue(int i) {
 
-		if(i < 0 || i > MAX_ORDINAL) return false;
-		if(i == 7 || i == 8 || i == 15) return false;
-		return true;
+		return i >= 0 && i <= MAX_ORDINAL && i != 7 && i != 8 && i != 15;
 	}
 }

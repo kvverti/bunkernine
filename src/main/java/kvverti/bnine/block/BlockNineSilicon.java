@@ -29,7 +29,7 @@ public class BlockNineSilicon extends BlockNine {
 	@Override
 	public BlockState createBlockState() {
 
-		return new BlockState(this, new IProperty[] { POWER });
+		return new BlockState(this, POWER);
 	}
 
 	@Override

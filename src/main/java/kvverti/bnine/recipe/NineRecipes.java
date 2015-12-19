@@ -17,19 +17,19 @@ public final class NineRecipes {
 		//Mazewood planks
 		GameRegistry.addShapelessRecipe(
 			new ItemStack(NineBlocks.planksMazewood, 4),
-			new Object[] { NineBlocks.logMazewood }
+			NineBlocks.logMazewood
 		);
 
 		//Mazewood slabs
 		GameRegistry.addShapedRecipe(
 			new ItemStack(NineBlocks.slabMazewood, 6),
-			new Object[] { "###", '#', NineBlocks.planksMazewood }
+			"###", '#', NineBlocks.planksMazewood
 		);
 
 		//Mazewood stairs
 		GameRegistry.addShapedRecipe(
 			new ItemStack(NineBlocks.stairsMazewood, 4),
-			new Object[] { "#  ", "## ", "###", '#', NineBlocks.planksMazewood }
+			"#  ", "## ", "###", '#', NineBlocks.planksMazewood
 		);
 
 		//Charcoal from mazewood
@@ -42,31 +42,31 @@ public final class NineRecipes {
 		//Mazewood fence
 		GameRegistry.addShapedRecipe(
 			new ItemStack(NineBlocks.fenceMazewood, 3),
-			new Object[] { "#|#", "#|#", '#', NineBlocks.planksMazewood, '|', Items.stick }
+			"#|#", "#|#", '#', NineBlocks.planksMazewood, '|', Items.stick
 		);
 
 		//Mazewood fence gate
 		GameRegistry.addShapedRecipe(
 			new ItemStack(NineBlocks.fenceGateMazewood),
-			new Object[] { "|#|", "|#|", '#', NineBlocks.planksMazewood, '|', Items.stick }
+			"|#|", "|#|", '#', NineBlocks.planksMazewood, '|', Items.stick
 		);
 
 		//Clouded glass
 		GameRegistry.addShapedRecipe(
 			new ItemStack(NineBlocks.cloudedGlass),
-			new Object[] { "##", "##", '#', NineItems.glassShard }
+			"##", "##", '#', NineItems.glassShard
 		);
 
 		//Clouded glass pane
 		GameRegistry.addShapedRecipe(
 			new ItemStack(NineBlocks.cloudedGlassPane, 16),
-			new Object[] { "###", "###", '#', NineBlocks.cloudedGlass }
+			"###", "###", '#', NineBlocks.cloudedGlass
 		);
 
 		//Rope
 		GameRegistry.addShapedRecipe(
 			new ItemStack(NineBlocks.rope),
-			new Object[] { "#", "#", "#", '#', Items.string }
+			"#", "#", "#", '#', Items.string
 		);
 
 		//Silicon smelting
@@ -86,13 +86,13 @@ public final class NineRecipes {
 		//Block of silicon
 		GameRegistry.addShapedRecipe(
 			new ItemStack(NineBlocks.blockSilicon),
-			new Object[] { "###", "###", "###", '#', NineItems.silicon }
+			"###", "###", "###", '#', NineItems.silicon
 		);
 
 		//Reverse
 		GameRegistry.addShapelessRecipe(
 			new ItemStack(NineItems.silicon, 9),
-			new Object[] { NineBlocks.blockSilicon }
+			NineBlocks.blockSilicon
 		);
 	}
 

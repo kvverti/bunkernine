@@ -190,10 +190,9 @@ public final class NineBlocks {
 		Registry.registerItemRenderer(saplingMazewood);
 		Registry.registerItemRenderer(leavesMazewood);
 
-		for(int i = 0; i <= NineLightColor.MAX_ORDINAL; i++) {
+		for(NineLightColor c : NineLightColor.values()) {
 
-			if(!NineLightColor.isUsedValue(i)) continue;
-			Registry.registerItemRenderer(fluorescentLight, i);
+			if(c != NineLightColor.NULL) Registry.registerItemRenderer(fluorescentLight, c.getMetadata());
 		}
 	}
 

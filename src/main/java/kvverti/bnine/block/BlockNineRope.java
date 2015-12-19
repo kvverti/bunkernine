@@ -30,7 +30,7 @@ public class BlockNineRope extends BlockNine {
 	@Override
 	public BlockState createBlockState() {
 
-		return new BlockState(this, new IProperty[] { UP, DOWN });
+		return new BlockState(this, UP, DOWN);
 	}
 
 	@Override

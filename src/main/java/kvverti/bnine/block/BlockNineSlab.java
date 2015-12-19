@@ -81,7 +81,7 @@ public abstract class BlockNineSlab extends BlockSlab implements StringID {
 	@Override
 	public BlockState createBlockState() {
 
-		return isDouble() ? new BlockState(this, new IProperty[] { VARIANT }) : new BlockState(this, new IProperty[] { VARIANT, HALF });
+		return isDouble() ? new BlockState(this, VARIANT) : new BlockState(this, VARIANT, HALF);
 	}
 
 	@Override

@@ -39,10 +39,9 @@ public class ItemNineFluorescentLight extends ItemBlock {
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List subItems) {
 
-		for(int i = 0; i <= MAX_ORDINAL; i++) {
+		for(NineLightColor c : values()) {
 
-			if(!isUsedValue(i)) continue;
-			subItems.add(new ItemStack(item, 1, i));
+			if(c != NULL) subItems.add(new ItemStack(item, 1, i));
 		}
 	}
 

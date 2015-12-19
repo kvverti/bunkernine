@@ -41,7 +41,7 @@ public class ItemNineFluorescentLight extends ItemBlock {
 
 		for(NineLightColor c : values()) {
 
-			if(c != NULL) subItems.add(new ItemStack(item, 1, i));
+			if(c != NULL) subItems.add(new ItemStack(item, 1, c.getMetadata()));
 		}
 	}
 

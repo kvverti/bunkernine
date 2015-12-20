@@ -4,6 +4,8 @@ import kvverti.bnine.block.NineBlocks;
 import kvverti.bnine.entity.NineEntities;
 import kvverti.bnine.item.NineItems;
 import kvverti.bnine.recipe.NineRecipes;
+import kvverti.bnine.util.LightColor;
+import kvverti.bnine.util.Logger;
 
 public abstract class Proxy {
 
@@ -22,5 +24,13 @@ public abstract class Proxy {
 		NineRecipes.registerOres();
 	}
 
-	public void postInit() { }
+	public void postInit() {
+
+		LightColor.close();
+		Logger.info("Registered light colors:");
+		for(LightColor c : LightColor.values()) {
+
+			Logger.info("\t%s", c);
+		}
+	}
 }

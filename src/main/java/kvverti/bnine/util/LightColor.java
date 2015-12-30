@@ -1,22 +1,32 @@
 package kvverti.bnine.util;
 
+import java.util.Set;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import kvverti.bnine.block.NineBlocks;
 import kvverti.bnine.client.Resources;
+import kvverti.bnine.init.Registry;
 
-//Under construction!!!
-public final class LightColor implements StringID {
+/**
+ * Instances of the LightColor class define colors used by Bunker 9's fluorescent lights.
+ * Instances of this class are immutable. The only way to create a LightColor is through
+ * the static {@link #register} method, which creates and adds a LightColor to a
+ * universal registry returned by the {@link #values()} and {@link #valuesArray} methods.
+ */
+public final class LightColor implements StringID, Comparable<LightColor> {
 
-	/*
+	/**
 	 * The "null" color. This LightColor has the name "null"
-	 * and the meta value -1.
+	 * and the meta value -1. This value should be used in place
+	 * of {@code null} for indicating an undefined or default color.
 	 */
 	public static final LightColor NULL = new LightColor(-1, "null");
-	private static final List<LightColor> values = new ArrayList<>(24);
+	private static final Set<LightColor> values = new HashSet<>();
 	private static boolean closed;
 	private static int nextFreeMeta;
 
@@ -47,8 +57,11 @@ public final class LightColor implements StringID {
 		name = s;
 	}
 
-	/*
-	 * Returns the String name of this LightColor.
+	/**
+	 * Returns the String name of this LightColor. This is the value
+	 * used to internally represent the color.
+	 *
+	 * @return The internal ID of this LightColor
 	 */
 	@Override
 	public String id() {
@@ -56,43 +69,139 @@ public final class LightColor implements StringID {
 		return name;
 	}
 
+	/**
+	 * Returns a String describing this LightColor. The returned String
+	 * is the sequence {@code LightColor} followed by a space, the name,
+	 * a space, and the metadata value in parentheses. For example, the
+	 * LightColor white will return {@code LightColor white (0)}.
+	 *
+	 * @return A String describing this LightColor.
+	 * @see #id
+	 */
 	@Override
 	public String toString() {
 
-		return String.format("Light color %s (%d)", name, index);
+		return String.format("LightColor %s (%d)", name, index);
 	}
 
-	/*
-	 * Returns the int representation of this LightColor.
-	 * This is generally an item damage value.
+	/**
+	 * Returns the item damage value associated with this LightColor.
+	 *
+	 * @return The item damage vaue associated with this LightColor
 	 */
 	public int metadata() {
 
 		return index;
 	}
 
-	/*
-	 * Returns the hex color associated with this LightColor.
-	 * This value may change when resources are reloaded.
+	/**
+	 * Returns the RGB hex color associated with this LightColor.
+	 * This value may change when resources are reloaded. Color
+	 * values are specified in the file {@code bunkernine:colors.json}.
+	 * Default colors are shown below:
+	 * <pre>
+	 * {@code
+	 *	"fluorescent": {
+	 *		"white": "ffffff",
+	 *		"orange": "ff9900",
+	 *		"magenta": "ff00ff",
+	 *		"lightBlue": "0099ff",
+	 *		"yellow": "ffff00",
+	 *		"lime": "00ff00",
+	 *		"pink": "ff0099",
+	 *		"cyan": "00ffff",
+	 *		"purple": "9900ff",
+	 *		"blue": "0000ff",
+	 *		"brown": "95600d",
+	 *		"green": "339900",
+	 *		"red": "ff3300",
+	 *		"peach": "ff9866"
+	 *	}
+	 * }
+	 * </pre>
+	 *
+	 * @return The RGB hex color associated with this LightColor
+	 * @see Resources
 	 */
-	/*@SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
 	public int getClientColor() {
 
 		return Resources.INSTANCE.getColorFluorescent(this);
-	}*/
-
-	/*
-	 * Returns an array containing all LightColor instances.
-	 * This array does not contain NULL.
-	 */
-	public static LightColor[] values() {
-
-		return values.toArray(new LightColor[0]);
 	}
 
-	/*
+	/**
+	 * Compares this LightColor to the specified LightColor. This is
+	 * done by comparing the two instances' metadata values. In a normal
+	 * session, no two distinct LightColors will be equal.
+	 *
+	 * @param color The color with which to compare this
+	 * @return A positive, zero, or negative integer if this color is
+	 *	greater than, equal to, or less than the specified color,
+	 *	respectively.
+	 */
+	@Override
+	public int compareTo(LightColor color) {
+
+		return this.metadata() - color.metadata();
+	}
+
+	/**
+	 * Compares this LightColor to the specified Object for equality.
+	 * Returns true if the object is also a LightColor and
+	 * {@code this.compareTo(o) == 0}.
+	 *
+	 * @param o The Object to compare with this for equality
+	 * @return Whether the specified Object is equal to this
+	 * @see #compareTo
+	 */
+	@Override
+	public boolean equals(Object o) {
+
+		return o instanceof LightColor && this.compareTo((LightColor) o) == 0;
+	}
+
+	/**
+	 * Returns this object's hash code. The hash code is the value
+	 * returned by {@link #metadata}.
+	 *
+	 * @return The hash code
+	 */
+	@Override
+	public int hashCode() {
+
+		return metadata();
+	}
+
+	/**
+	 * Returns a List containing all LightColor instances.
+	 * This List does not contain NULL and can be modified.
+	 * Changes to this List are not backed internally.
+	 *
+	 * @return A List containing all registered LightColors
+	 * @see #valuesArray
+	 */
+	public static List<LightColor> values() {
+
+		return new ArrayList<>(values);
+	}
+
+	/**
+	 * Convenience method returning an array of all LightColor instances.
+	 *
+	 * @return An array containing all registered LightColors
+	 * @see #values()
+	 */
+	public static LightColor[] valuesArray() {
+
+		return values.toArray(new LightColor[values.size()]);
+	}
+
+	/**
 	 * Returns the LightColor with the given metadata.
-	 * If no such color exists, NULL is returned.
+	 * If no such color exists, {@link #NULL} is returned.
+	 *
+	 * @param meta The metadata value of the LightColor
+	 * @return A LightColor with the specified value.
 	 */
 	public static LightColor byMetadata(int meta) {
 
@@ -103,9 +212,12 @@ public final class LightColor implements StringID {
 		return NULL;
 	}
 
-	/*
+	/**
 	 * Returns the LightColor with the given name.
-	 * If no such color exists, NULL is returned.
+	 * If no such color exists, {@link #NULL} is returned.
+	 *
+	 * @param name The String ID of the LightColor
+	 * @return A LightColor with the specified name.
 	 */
 	public static LightColor byName(String name) {
 
@@ -116,49 +228,64 @@ public final class LightColor implements StringID {
 		return NULL;
 	}
 
-	/*
-	 * Returns whether the given int is used as a metadata value.
-	 * Note that this will also return true for reserved meta values.
+	/**
+	 * Returns whether the given value is associated with any LightColor.
+	 * More specifically, this returns true for any value {@code v} such that
+	 * {@code c.metadata()} for any {@code c} in {@link #values()} returns {@code v}.
+	 * Note that this will also return true for reserved metadata values.
+	 *
+	 * @param i The meta value to test against existing LightColors
+	 * @return Whether the specified value is associated with a LightColor
+	 * @see #nextFreeMeta()
 	 */
 	public static boolean isMetaUsed(int i) {
 
 		return LightColor.byMetadata(i) != NULL || i == 7 || i == 8 || i == 15;
 	}
 
-	/*
-	 * Returns whether the given String is used as a name.
+	/**
+	 * Returns whether the given String is used as a name for any LightColor.
+	 * More specifically, this returns true for any String {@code s} such that
+	 * {@code c.id()} for any {@code c} in {@link #values()} returns {@code s}.
 	 * Note that this will also return true for reserved names.
+	 *
+	 * @param s The name to test against existing LightColors
+	 * @return Whether the specified name is a LightColor ID
 	 */
 	public static boolean isNameUsed(String s) {
 
 		return LightColor.byName(s) != NULL || "null".equals(s);
 	}
 
-	/*
-	 * This method is called automatically in the post-init phase of mod loading.
-	 * After closure, no new LightColor objects may be created. Users should
-	 * not call this method.
+	/**
+	 * Disables new LightColor creation. This method is called automatically
+	 * in the post-init phase of mod loading. This method also registers item
+	 * renderers for each registered LightColor. Users should not invoke this
+	 * method.
 	 */
 	public static void close() {
 
 		closed = true;
+		for(LightColor c : values) {
+
+			Registry.registerItemRenderer(NineBlocks.fluorescentLight, c.metadata());
+		}
 	}
 
-	/*
+	/**
 	 * Returns a LightColor with the specified name. If the name
 	 * is not present as a color, a new color is created with the
 	 * specified name, otherwise the color with the matching
 	 * name is returned. The meta value is used as the metadata
 	 * value of the color if possible, otherwise the value returned
-	 * by nextFreeMeta() is used.
-	 * Parameters:
-	 *	meta - the metadata value to use, if free.
-	 *	name - the name of the color to create and/or return.
-	 * Returns: A LightColor with the specified name.
-	 * Throws:
-	 * 	IllegalStateException - if the class is closed.
-	 * 	NullPointerException - if name is null.
-	 * 	IllegalArgumentException - If meta is negative.
+	 * by {@link #nextFreeMeta()} is used.
+	 *
+	 * @param meta The item metadata value to associate with the color
+	 * @param name The String name of the color to register
+	 * @return A LightColor with the specified name
+	 * @throws IllegalStateException If the class is closed
+	 * @throws NullPointerException If name is null
+	 * @throws IllegalArgumentException If meta is negative
 	 */
 	public static LightColor register(int meta, String name) {
 
@@ -174,6 +301,27 @@ public final class LightColor implements StringID {
 		return color;
 	}
 
+	/**
+	 * Returns the smallest meta value not already used by any existing
+	 * LightColor. Assuming there are no gaps in the registered colors,
+	 * users can use this method to ensure consecutive numeric IDs for
+	 * their colors:
+	 * <pre>
+	 * {@code
+	 *	String[] names = ...
+	 *	int metaValue = LightColor.nextFreeMeta();
+	 *
+	 *	for(String name : names) {
+	 *
+	 *		LightColor.register(metaValue++, name);
+	 *	}
+	 * }
+	 * </pre>
+	 *
+	 * @return The smallest item metadata value not associated with an
+	 *	existing LightColor
+	 * @see #isMetaUsed
+	 */
 	public static int nextFreeMeta() {
 
 		while(isMetaUsed(nextFreeMeta)) {

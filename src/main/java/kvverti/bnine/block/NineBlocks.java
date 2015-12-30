@@ -189,11 +189,6 @@ public final class NineBlocks {
 		Registry.registerItemRenderer(blockSilicon);
 		Registry.registerItemRenderer(saplingMazewood);
 		Registry.registerItemRenderer(leavesMazewood);
-
-		for(NineLightColor c : NineLightColor.values()) {
-
-			if(c != NineLightColor.NULL) Registry.registerItemRenderer(fluorescentLight, c.getMetadata());
-		}
 	}
 
 	public static void registerTileEntities() {

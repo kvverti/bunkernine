@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 
 import kvverti.bnine.block.entity.TileFluorescentLight;
 import kvverti.bnine.item.NineItems;
-import kvverti.bnine.item.NineLightColor;
+import kvverti.bnine.util.LightColor;
 
 public class BlockNineFluorescentLight extends BlockNine implements ITileEntityProvider {
 
@@ -83,9 +83,9 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 		if(world.getTileEntity(pos) instanceof TileFluorescentLight) {
 
 			TileFluorescentLight te = (TileFluorescentLight) world.getTileEntity(pos);
-			NineLightColor c = te.getDefaultColor();
+			LightColor c = te.getDefaultColor();
 
-			int color = c != NineLightColor.NULL ? c.getClientColor() : te.getColor();
+			int color = c != LightColor.NULL ? c.getClientColor() : te.getColor();
 			if(!isLit) {
 
 				int r = (color & 0xff0000) / 3;
@@ -388,13 +388,13 @@ public class BlockNineFluorescentLight extends BlockNine implements ITileEntityP
 
 	private ItemStack getDropStack(World world, IBlockState state, TileFluorescentLight te) {
 
-		NineLightColor color = te.getDefaultColor();
+		LightColor color = te.getDefaultColor();
 		ItemStack stack = new ItemStack(
 			getItemDropped(state, world.rand, 0), 1,
-			color != NineLightColor.NULL ? color.getMetadata() : 0
+			color != LightColor.NULL ? color.metadata() : 0
 		);
 
-		if(color == NineLightColor.NULL) {
+		if(color == LightColor.NULL) {
 
 			NBTTagCompound tag = new NBTTagCompound();
 			tag.setInteger(TileFluorescentLight.CUSTOM_COLOR, te.getColor());

@@ -20,9 +20,10 @@ import net.minecraft.world.World;
 import kvverti.bnine.block.BlockNineFluorescentLight;
 import kvverti.bnine.block.NineBlocks;
 import kvverti.bnine.block.entity.TileFluorescentLight;
+import kvverti.bnine.util.LightColor;
 
-import static kvverti.bnine.item.NineLightColor.*;
 import static kvverti.bnine.block.entity.TileFluorescentLight.*;
+import static kvverti.bnine.util.LightColor.*;
 
 public class ItemNineFluorescentLight extends ItemBlock {
 
@@ -39,9 +40,9 @@ public class ItemNineFluorescentLight extends ItemBlock {
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List subItems) {
 
-		for(NineLightColor c : values()) {
+		for(LightColor c : values()) {
 
-			if(c != NULL) subItems.add(new ItemStack(item, 1, c.getMetadata()));
+			subItems.add(new ItemStack(item, 1, c.metadata()));
 		}
 	}
 
@@ -85,7 +86,7 @@ public class ItemNineFluorescentLight extends ItemBlock {
 	public int getColorFromItemStack(ItemStack stack, int renderPass) {
 
 		NBTTagCompound tag = stack.getSubCompound("BlockEntityTag", false);
-		NineLightColor col = tag != null ? byName(tag.getString(COLOR)) : NULL;
+		LightColor col = tag != null ? byName(tag.getString(COLOR)) : NULL;
 
 		return col != NULL ? col.getClientColor()
 			: tag != null && tag.hasKey(CUSTOM_COLOR, 3) ? tag.getInteger(CUSTOM_COLOR)
@@ -95,8 +96,8 @@ public class ItemNineFluorescentLight extends ItemBlock {
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 
-		NineLightColor color = byMetadata(stack.getMetadata());
-		return "tile.fluorescentLight." + color;
+		LightColor color = byMetadata(stack.getMetadata());
+		return "tile.fluorescentLight." + color.id();
 	}
 
 	@Override

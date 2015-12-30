@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 import kvverti.bnine.block.BlockNineFluorescentLight;
 import kvverti.bnine.block.NineBlocks;
-import kvverti.bnine.item.NineLightColor;
+import kvverti.bnine.util.LightColor;
 import kvverti.bnine.util.ClassID;
 
 @ClassID("fluorescentLight")
@@ -26,14 +26,11 @@ public class TileFluorescentLight extends TileEntity implements IUpdatePlayerLis
 
 	private byte power = 0;
 	private int color = 0xffffff;
-	private NineLightColor defaultColor = NineLightColor.NULL;
+	private LightColor defaultColor = LightColor.NULL;
 
 	public void setPower(int pow) {
 
-		if(pow < 0) pow = 0;
-		if(pow > 15) pow = 15;
-
-		power = (byte) pow;
+		power = (byte) (pow < 0 ? 0 : pow > 15 ? 15 : pow);
 	}
 
 	public byte getPower() {
@@ -43,10 +40,7 @@ public class TileFluorescentLight extends TileEntity implements IUpdatePlayerLis
 
 	public void setColor(int col) {
 
-		if(col < 0x0) col = 0x0;
-		if(col > 0xffffff) col = 0xffffff;
-
-		color = col;
+		color = col < 0 ? 0 : col > 0xffffff ? 0xffffff : col;
 	}
 
 	public int getColor() {
@@ -54,13 +48,12 @@ public class TileFluorescentLight extends TileEntity implements IUpdatePlayerLis
 		return color;
 	}
 
-	public void setDefaultColor(NineLightColor col) {
+	public void setDefaultColor(LightColor col) {
 
-		if(col == null) col = NineLightColor.NULL;
-		defaultColor = col;
+		defaultColor = col == null ? LightColor.NULL : col;
 	}
 
-	public NineLightColor getDefaultColor() {
+	public LightColor getDefaultColor() {
 
 		return defaultColor;
 	}
@@ -70,7 +63,7 @@ public class TileFluorescentLight extends TileEntity implements IUpdatePlayerLis
 
 		super.writeToNBT(tag);
 		tag.setByte(POWER, power);
-		tag.setString(COLOR, defaultColor.getName());
+		tag.setString(COLOR, defaultColor.id());
 		tag.setInteger(CUSTOM_COLOR, color);
 	}
 
@@ -79,7 +72,7 @@ public class TileFluorescentLight extends TileEntity implements IUpdatePlayerLis
 
 		super.readFromNBT(tag);
 		setPower(tag.getByte(POWER));
-		setDefaultColor(NineLightColor.byName(tag.getString(COLOR)));
+		setDefaultColor(LightColor.byName(tag.getString(COLOR)));
 		setColor(tag.getInteger(CUSTOM_COLOR));
 	}
 
@@ -140,7 +133,7 @@ public class TileFluorescentLight extends TileEntity implements IUpdatePlayerLis
 
 			if(tag.hasKey(COLOR, 8)) {
 
-				setDefaultColor(NineLightColor.byName(tag.getString(COLOR)));
+				setDefaultColor(LightColor.byName(tag.getString(COLOR)));
 
 			}
 			if(tag.hasKey(CUSTOM_COLOR, 3)) {
@@ -148,6 +141,6 @@ public class TileFluorescentLight extends TileEntity implements IUpdatePlayerLis
 				setColor(tag.getInteger(CUSTOM_COLOR));
 			}
 
-		} else setDefaultColor(NineLightColor.byMetadata(stack.getMetadata()));
+		} else setDefaultColor(LightColor.byMetadata(stack.getMetadata()));
 	}
 }

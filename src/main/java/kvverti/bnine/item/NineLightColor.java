@@ -7,6 +7,10 @@ import net.minecraft.util.IStringSerializable;
 
 import kvverti.bnine.client.Resources;
 
+/**
+ * @deprecated This class is deprecated in favor of {@link kvverti.bnine.util.LightColor}.
+ */
+@Deprecated
 public enum NineLightColor implements IStringSerializable {
 
 	WHITE		( 0, "white"	),

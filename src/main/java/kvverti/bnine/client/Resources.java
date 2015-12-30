@@ -17,10 +17,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 import com.google.gson.*;
+import com.google.common.base.Function;
 
 import kvverti.bnine.init.Meta;
 import kvverti.bnine.item.NineLightColor;
+import kvverti.bnine.util.LightColor;
 import kvverti.bnine.util.Logger;
+import kvverti.bnine.util.StringID;
 
 @SideOnly(Side.CLIENT)
 public final class Resources implements IResourceManagerReloadListener {
@@ -31,7 +34,7 @@ public final class Resources implements IResourceManagerReloadListener {
 	private static final String[] EGG_KEYS = { "witherstump" };
 	private static final ResourceLocation COLORS = new ResourceLocation(Meta.ID + ":colors.json");
 
-	private final Map<NineLightColor, String> colorsFluorescent = new EnumMap<>(NineLightColor.class);
+	private final Map<LightColor, String> colorsFluor = new HashMap<>(16);
 	private final Map<String, String> colorsBlock = new HashMap<>(16);
 	private final Map<String, String[]> colorsEgg = new HashMap<>(16);
 
@@ -50,9 +53,15 @@ public final class Resources implements IResourceManagerReloadListener {
 		}
 	}
 
+	@Deprecated
 	public int getColorFluorescent(NineLightColor color) {
 
-		return parseInt(colorsFluorescent.get(color), 16, 0xffffff);
+		return 0xffffff;
+	}
+
+	public int getColorFluorescent(LightColor color) {
+
+		return parseInt(colorsFluor.get(color), 16, 0xffffff);
 	}
 
 	public int getColorBlock(String id) {
@@ -95,9 +104,9 @@ public final class Resources implements IResourceManagerReloadListener {
 			) {
 				JsonObject json = new Gson().fromJson(reader, JsonElement.class).getAsJsonObject();
 
-				fillMap(json.getAsJsonObject("fluorescent"), NineLightColor.values(), colorsFluorescent);
-				fillMap(json.getAsJsonObject("block"), BLOCK_KEYS, colorsBlock);
-				fillMapWithArray(json.getAsJsonObject("egg"), EGG_KEYS, colorsEgg);
+				fillMap(json.getAsJsonObject("fluorescent"), LightColor.valuesArray(), StringID_id, colorsFluor);
+				fillMap(json.getAsJsonObject("block"), BLOCK_KEYS, Object_toString, colorsBlock);
+				fillMapWithArray(json.getAsJsonObject("egg"), EGG_KEYS, Object_toString, colorsEgg);
 
 			} catch(RuntimeException e) {
 
@@ -113,37 +122,37 @@ public final class Resources implements IResourceManagerReloadListener {
 
 	private void clearMaps() {
 
-		colorsFluorescent.clear();
+		colorsFluor.clear();
 		colorsBlock.clear();
 		colorsEgg.clear();
 	}
 
-	private <T> void fillMap(JsonObject object, T[] keys, Map<T, String> map) {
+	private <T> void fillMap(JsonObject out, T[] keys, Function<? super T, String> func, Map<T, String> in) {
 
-		if(object != null) {
+		if(out != null) {
 
 			JsonElement elem;
 			for(T t : keys) {
 
-				elem = object.get(String.valueOf(t));
+				elem = out.get(func.apply(t));
 				if(elem != null && elem.isJsonPrimitive()) {
 
-					map.put(t, elem.getAsString());
+					in.put(t, elem.getAsString());
 				}
 			}
 		}
 	}
 
-	private <T> void fillMapWithArray(JsonObject object, T[] keys, Map<T, String[]> map) {
+	private <T> void fillMapWithArray(JsonObject out, T[] keys, Function<? super T, String> func, Map<T, String[]> in) {
 
-		if(object != null) {
+		if(out != null) {
 
 			JsonElement elem;
 			String[] array;
 			int length;
 			for(T t : keys) {
 
-				elem = object.get(String.valueOf(t));
+				elem = out.get(func.apply(t));
 				if(elem != null && elem.isJsonArray()) {
 
 					length = elem.getAsJsonArray().size();
@@ -152,9 +161,29 @@ public final class Resources implements IResourceManagerReloadListener {
 
 						array[i] = elem.getAsJsonArray().get(i).getAsString();
 					}
-					map.put(t, array);
+					in.put(t, array);
 				}
 			}
 		}
 	}
+
+	//StringID::id
+	private static final Function<StringID, String> StringID_id = new Function<StringID, String>() {
+
+		@Override
+		public String apply(StringID obj) {
+
+			return obj.id();
+		}
+	};
+
+	//Object::toString
+	private static final Function<Object, String> Object_toString = new Function<Object, String>() {
+
+		@Override
+		public String apply(Object obj) {
+
+			return obj.toString();
+		}
+	};
 }

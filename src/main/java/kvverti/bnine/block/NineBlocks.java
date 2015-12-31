@@ -41,6 +41,7 @@ public final class NineBlocks {
 	public static Block blockSilicon;
 	public static Block saplingMazewood;
 	public static Block leavesMazewood;
+	public static Block twistle;
 
 	static {
 
@@ -142,6 +143,11 @@ public final class NineBlocks {
 			.setHardness(0.0f)
 			.setStepSound(Block.soundTypeGrass)
 			.setUnlocalizedName("saplingMazewood");
+
+		twistle = new BlockNineTwistle("twistle")
+			.setHardness(0.0f)
+			.setStepSound(Block.soundTypeGrass)
+			.setUnlocalizedName("twistle");
 	}
 
 	public static void register() {
@@ -163,6 +169,7 @@ public final class NineBlocks {
 		Registry.registerBlock(blockSilicon);
 		Registry.registerBlock(saplingMazewood);
 		Registry.registerBlock(leavesMazewood, ItemNineLeaves.class);
+		Registry.registerBlock(twistle, ItemNineTwistle.class);
 	}
 
 	public static void doSpecialStateMapping() {
@@ -171,6 +178,7 @@ public final class NineBlocks {
 		Registry.ignoreStates(blockSilicon, BlockNineSilicon.POWER);
 		Registry.ignoreStates(saplingMazewood, BlockNineSapling.TYPE);
 		Registry.ignoreStates(leavesMazewood, BlockNineLeaves.DECAYABLE, BlockNineLeaves.CHECK_DECAY);
+		Registry.ignoreStates(twistle, BlockNineTwistle.AGE);
 	}
 
 	public static void registerRenderers() {
@@ -189,6 +197,7 @@ public final class NineBlocks {
 		Registry.registerItemRenderer(blockSilicon);
 		Registry.registerItemRenderer(saplingMazewood);
 		Registry.registerItemRenderer(leavesMazewood);
+		Registry.registerItemRenderer(twistle);
 	}
 
 	public static void registerTileEntities() {

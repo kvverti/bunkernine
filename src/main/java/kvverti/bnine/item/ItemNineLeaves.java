@@ -9,12 +9,9 @@ import net.minecraft.block.Block;
 
 public class ItemNineLeaves extends ItemBlock {
 
-	private final Block leaves;
-
 	public ItemNineLeaves(Block block) {
 
 		super(block);
-		leaves = block;
 	}
 
 	@Override
@@ -27,6 +24,6 @@ public class ItemNineLeaves extends ItemBlock {
 	@SideOnly(Side.CLIENT)
 	public int getColorFromItemStack(ItemStack stack, int renderpass) {
 
-		return leaves.getBlockColor();
+		return block.getBlockColor();
 	}
 }

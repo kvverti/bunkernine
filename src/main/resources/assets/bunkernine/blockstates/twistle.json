@@ -1,0 +1,8 @@
+{
+	"variants": {
+		"down=false,up=false": { "model": "bunkernine:twistle_top" },
+		"down=false,up=true": { "model": "bunkernine:twistle" },
+		"down=true,up=false": { "model": "bunkernine:twistle_top" },
+		"down=true,up=true": { "model": "bunkernine:twistle" }
+	}
+}

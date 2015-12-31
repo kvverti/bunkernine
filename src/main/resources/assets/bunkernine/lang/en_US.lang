@@ -15,8 +15,6 @@ tile.fluorescentLight.lightBlue.name=Light Blue Fluorescent Light
 tile.fluorescentLight.yellow.name=Yellow Fluorescent Light
 tile.fluorescentLight.lime.name=Lime Fluorescent Light
 tile.fluorescentLight.pink.name=Pink Fluorescent Light
-tile.fluorescentLight.gray.name=Gray Fluorescent Light
-tile.fluorescentLight.silver.name=Silver Fluorescent Light
 tile.fluorescentLight.cyan.name=Cyan Fluorescent Light
 tile.fluorescentLight.purple.name=Argon Light
 tile.fluorescentLight.blue.name=Xenon Light
@@ -29,6 +27,7 @@ tile.oreSilicon.name=Silicate
 tile.blockSilicon.name=Block of Silicon
 tile.leavesMazewood.name=Mazewood Leaves
 tile.saplingMazewood.name=Mazewood Sapling
+tile.twistle.name=Twistle
 
 item.glassShard.name=Glass Shard
 item.nineSpawnEgg.name=Spawn %s

@@ -30,8 +30,9 @@ public class BlockNineTwistle extends BlockNine implements IPlantable {
 		setLightOpacity(0);
 		setIsOpaqueCube(false);
 		setIsFullCube(false);
-		setBlockBounds(0.21875f, 0.0f, 0.21875f, 0.78125f, 1.0f, 0.78125f);
-		setLightLevel(0.4375f);
+		float f = 2.5f / 16;
+		setBlockBounds(f, 0.0f, f, 1.0f - f, 1.0f, 1.0f - f);
+		setLightLevel(0.6f);
 		setDefaultState(
 			blockState.getBaseState()
 			.withProperty(AGE, 0)

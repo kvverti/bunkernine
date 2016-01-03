@@ -9,6 +9,8 @@ import kvverti.bnine.util.Logger;
 
 public abstract class Proxy {
 
+	protected Proxy() { }
+
 	public void preInit() {
 
 		NineBlocks.register();

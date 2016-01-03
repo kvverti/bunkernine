@@ -8,6 +8,8 @@ import kvverti.bnine.init.Meta;
 
 public final class Logger {
 
+	private Logger() { }
+
 	public static void log(Level level, String message, Object... args) {
 
 		FMLLog.log(Meta.NAME, level, message, args);

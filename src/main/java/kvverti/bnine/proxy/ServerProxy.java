@@ -1,3 +1,3 @@
 package kvverti.bnine.proxy;
 
-public class ServerProxy extends Proxy { }
+public final class ServerProxy extends Proxy { }

@@ -8,4 +8,6 @@ public final class Meta {
 
 	public static final String SERVER_PROXY_CLASS = "kvverti.bnine.proxy.ServerProxy";
 	public static final String CLIENT_PROXY_CLASS = "kvverti.bnine.proxy.ClientProxy";
+
+	private Meta() { }
 }

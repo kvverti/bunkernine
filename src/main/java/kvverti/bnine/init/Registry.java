@@ -28,6 +28,8 @@ public final class Registry {
 
 	public static int entID = 0;
 
+	private Registry() { }
+
 	public static void registerBlock(Block block) {
 
 		GameRegistry.registerBlock(block, ((StringID) block).id());

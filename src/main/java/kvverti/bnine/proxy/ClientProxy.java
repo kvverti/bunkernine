@@ -6,7 +6,7 @@ import kvverti.bnine.item.NineItems;
 import kvverti.bnine.init.Registry;
 import kvverti.bnine.client.Resources;
 
-public class ClientProxy extends Proxy {
+public final class ClientProxy extends Proxy {
 
 	@Override
 	public void preInit() {

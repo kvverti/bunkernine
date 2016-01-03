@@ -12,6 +12,8 @@ import kvverti.bnine.item.ItemNineSpawnEgg;
 
 public final class NineEntities {
 
+	private NineEntities() { }
+
 	public static void register() {
 
 		Registry.registerEntity(EntityDebugAxis.class);

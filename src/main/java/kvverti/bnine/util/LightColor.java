@@ -57,12 +57,6 @@ public final class LightColor implements StringID, Comparable<LightColor> {
 		name = s;
 	}
 
-	/**
-	 * Returns the String name of this LightColor. This is the value
-	 * used to internally represent the color.
-	 *
-	 * @return The internal ID of this LightColor
-	 */
 	@Override
 	public String id() {
 
@@ -97,31 +91,13 @@ public final class LightColor implements StringID, Comparable<LightColor> {
 	/**
 	 * Returns the RGB hex color associated with this LightColor.
 	 * This value may change when resources are reloaded. Color
-	 * values are specified in the file {@code bunkernine:colors.json}.
-	 * Default colors are shown below:
-	 * <pre>
-	 * {@code
-	 *	"fluorescent": {
-	 *		"white": "ffffff",
-	 *		"orange": "ff9900",
-	 *		"magenta": "ff00ff",
-	 *		"lightBlue": "0099ff",
-	 *		"yellow": "ffff00",
-	 *		"lime": "00ff00",
-	 *		"pink": "ff0099",
-	 *		"cyan": "00ffff",
-	 *		"purple": "9900ff",
-	 *		"blue": "0000ff",
-	 *		"brown": "95600d",
-	 *		"green": "339900",
-	 *		"red": "ff3300",
-	 *		"peach": "ff9866"
-	 *	}
-	 * }
-	 * </pre>
+	 * values are specified in the file {@code bunkernine:colors.json}
+	 * under the compound {@code fluorescent}. This color's String ID
+	 * is used as the key and a String of hexidecimal digits representing
+	 * RGB color is the value.
 	 *
 	 * @return The RGB hex color associated with this LightColor
-	 * @see Resources
+	 * @see Resources#getColorFluorescent(LightColor)
 	 */
 	@SideOnly(Side.CLIENT)
 	public int getClientColor() {
@@ -134,7 +110,7 @@ public final class LightColor implements StringID, Comparable<LightColor> {
 	 * done by comparing the two instances' metadata values. In a normal
 	 * session, no two distinct LightColors will be equal.
 	 *
-	 * @param color The color with which to compare this
+	 * @param color The color to be compared
 	 * @return A positive, zero, or negative integer if this color is
 	 *	greater than, equal to, or less than the specified color,
 	 *	respectively.
@@ -174,7 +150,7 @@ public final class LightColor implements StringID, Comparable<LightColor> {
 
 	/**
 	 * Returns a List containing all LightColor instances.
-	 * This List does not contain NULL and can be modified.
+	 * This List does not contain {@link #NULL} and can be modified.
 	 * Changes to this List are not backed internally.
 	 *
 	 * @return A List containing all registered LightColors
@@ -230,8 +206,8 @@ public final class LightColor implements StringID, Comparable<LightColor> {
 
 	/**
 	 * Returns whether the given value is associated with any LightColor.
-	 * More specifically, this returns true for any value {@code v} such that
-	 * {@code c.metadata()} for any {@code c} in {@link #values()} returns {@code v}.
+	 * More specifically, this returns true for any value {@code v} such that,
+	 * for one {@code c} in {@link #values()}, {@code c.metadata()} returns {@code v}.
 	 * Note that this will also return true for reserved metadata values.
 	 *
 	 * @param i The meta value to test against existing LightColors
@@ -240,13 +216,13 @@ public final class LightColor implements StringID, Comparable<LightColor> {
 	 */
 	public static boolean isMetaUsed(int i) {
 
-		return LightColor.byMetadata(i) != NULL || i == 7 || i == 8 || i == 15;
+		return LightColor.byMetadata(i) != NULL || i == 7 || i == 8 || i == 15 || i == -1;
 	}
 
 	/**
 	 * Returns whether the given String is used as a name for any LightColor.
-	 * More specifically, this returns true for any String {@code s} such that
-	 * {@code c.id()} for any {@code c} in {@link #values()} returns {@code s}.
+	 * More specifically, this returns true for any String {@code s} such that,
+	 * for one {@code c} in {@link #values()}, {@code c.id()} returns {@code s}.
 	 * Note that this will also return true for reserved names.
 	 *
 	 * @param s The name to test against existing LightColors

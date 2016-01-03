@@ -12,6 +12,8 @@ import kvverti.bnine.item.NineItems;
 
 public final class NineRecipes {
 
+	private NineRecipes() { }
+
 	public static void register() {
 
 		//Mazewood planks

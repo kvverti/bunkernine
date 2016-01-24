@@ -79,8 +79,7 @@ public class BlockNine extends Block implements StringID {
 	@Override
 	public int quantityDropped(Random random) {
 
-		if(dropRandom) return random.nextInt(maxBound) + dropOffset;
-		else return dropQuantity;
+		return dropRandom ? random.nextInt(maxBound) + dropOffset : dropQuantity;
 	}
 
 	public BlockNine setQuantityDropped(int quantity) {

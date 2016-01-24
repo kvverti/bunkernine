@@ -20,9 +20,19 @@ public final class Logger {
 		log(Level.INFO, message, args);
 	}
 
+	public static void info(Object obj) {
+
+		log(Level.INFO, String.valueOf(obj));
+	}
+
 	public static void warn(String message, Object... args) {
 
 		log(Level.WARN, message, args);
+	}
+
+	public static void warn(Object obj) {
+
+		log(Level.WARN, String.valueOf(obj));
 	}
 
 	public static void error(String message, Object... args) {
@@ -35,13 +45,33 @@ public final class Logger {
 		FMLLog.log(Meta.NAME, Level.ERROR, error, message, args);
 	}
 
+	public static void error(Throwable error) {
+
+		FMLLog.log(Meta.NAME, Level.ERROR, error, "");
+	}
+
+	public static void error(Object obj) {
+
+		log(Level.ERROR, String.valueOf(obj));
+	}
+
 	public static void debug(String message, Object... args) {
 
 		log(Level.DEBUG, message, args);
 	}
 
+	public static void debug(Object obj) {
+
+		log(Level.DEBUG, String.valueOf(obj));
+	}
+
 	public static void trace(String message, Object... args) {
 
 		log(Level.TRACE, message, args);
+	}
+
+	public static void trace(Object obj) {
+
+		log(Level.TRACE, String.valueOf(obj));
 	}
 }

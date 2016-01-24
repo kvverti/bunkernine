@@ -20,7 +20,6 @@ import com.google.gson.*;
 import com.google.common.base.Function;
 
 import kvverti.bnine.init.Meta;
-import kvverti.bnine.item.NineLightColor;
 import kvverti.bnine.util.LightColor;
 import kvverti.bnine.util.Logger;
 import kvverti.bnine.util.StringID;
@@ -51,12 +50,6 @@ public final class Resources implements IResourceManagerReloadListener {
 
 			return _default;
 		}
-	}
-
-	@Deprecated
-	public int getColorFluorescent(NineLightColor color) {
-
-		return 0xffffff;
 	}
 
 	public int getColorFluorescent(LightColor color) {
@@ -108,7 +101,7 @@ public final class Resources implements IResourceManagerReloadListener {
 				fillMap(json.getAsJsonObject("block"), BLOCK_KEYS, Object_toString, colorsBlock);
 				fillMapWithArray(json.getAsJsonObject("egg"), EGG_KEYS, Object_toString, colorsEgg);
 
-			} catch(RuntimeException e) {
+			} catch(JsonParseException e) {
 
 				Logger.error(e, "Caught exception reading resource file:");
 

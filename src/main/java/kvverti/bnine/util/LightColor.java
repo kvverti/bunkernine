@@ -261,13 +261,13 @@ public final class LightColor implements StringID, Comparable<LightColor> {
 	 * @return A LightColor with the specified name
 	 * @throws IllegalStateException If the class is closed
 	 * @throws NullPointerException If name is null
-	 * @throws IllegalArgumentException If meta is negative
+	 * @throws IndexOutOfBoundsException If meta is negative
 	 */
 	public static LightColor register(int meta, String name) {
 
 		if(closed) throw new IllegalStateException("Class LightColor is closed");
 		if(name == null || name.equals("")) throw new NullPointerException(name);
-		if(meta < 0) throw new IllegalArgumentException("Meta must be positive");
+		if(meta < 0) throw new IndexOutOfBoundsException(Integer.toString(meta));
 
 		LightColor color = !isNameUsed(name) ?
 			new LightColor(isMetaUsed(meta) ? nextFreeMeta() : meta, name)

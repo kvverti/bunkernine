@@ -61,7 +61,7 @@ public enum NineLightColor implements IStringSerializable {
 	@SideOnly(Side.CLIENT)
 	public int getClientColor() {
 
-		return Resources.INSTANCE.getColorFluorescent(this);
+		return 0xffffff;
 	}
 
 	public static NineLightColor byMetadata(int meta) {

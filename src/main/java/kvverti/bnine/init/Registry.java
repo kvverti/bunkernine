@@ -48,7 +48,7 @@ public final class Registry {
 	@SideOnly(Side.CLIENT)
 	public static void ignoreStates(Block block, IProperty... ignoreStates) {
 
-		ModelLoader.setCustomStateMapper(block, new StateMap.Builder().addPropertiesToIgnore(ignoreStates).build());
+		ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(ignoreStates).build());
 	}
 
 	public static void registerItem(Item item) {

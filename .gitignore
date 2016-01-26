@@ -2,4 +2,5 @@
 build/
 psds/
 testDir/
+src-*/
 *.txt

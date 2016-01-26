@@ -14,9 +14,9 @@ import kvverti.bnine.block.NineBlocks;
 
 /*
  * WorldGenerator functions
- * void #func_175903_a(World, BlockPos, IBlockState) set block state in world
- * void #func_175905_a(World, BlockPos, Block, int) set block state from meta in world
- * void #func_175906_a(World, BlockPos, Block) set block with default state (meta 0) in world
+ * void #setBlockAndNotifyAdequately(World, BlockPos, IBlockState) set block state in world
+ * void #setBlock(World, BlockPos, Block, int) set block state from meta in world
+ * void #setBlock(World, BlockPos, Block) set block with default state (meta 0) in world
  *
  * AbstractTree functions
  * void #func_175921_a(World, BlockPos) set block at pos to dirt
@@ -46,40 +46,45 @@ public class NineTree extends WorldGenAbstractTree {
 		if(!verify(world, pos, leafOrigin, height)) return false;
 
 		for(int x = -2; x <= 2; x++) {
+		for(int y = -2; y <= 1; y++) {
+		for(int z = -2; z <= 2; z++) {
 
-			for(int y = -2; y <= 1; y++) {
+			switch(y) {
 
-				for(int z = -2; z <= 2; z++) {
+				case -2:
+				case -1:
+					if(MathHelper.abs_int(x) != 2
+					|| MathHelper.abs_int(z) != 2
+					|| rand.nextInt(4) < 2) setBlockAndNotifyAdequately(
+						world, leafOrigin.add(x, y, z), leavesBlock.getDefaultState());
+					break;
 
-					switch(y) {
+				case 0:
+					if(MathHelper.abs_int(x) < 2 && MathHelper.abs_int(z) < 2) {
 
-						case -2:
-						case -1:
-							if(MathHelper.abs_int(x) != 2 || MathHelper.abs_int(z) != 2 || rand.nextInt(4) < 2) func_175903_a(world, leafOrigin.add(x, y, z), leavesBlock.getDefaultState());
-							break;
-
-						case 0:
-							if(MathHelper.abs_int(x) < 2 && MathHelper.abs_int(z) < 2) {
-
-								if(MathHelper.abs_int(x) != MathHelper.abs_int(z) || rand.nextInt(4) < 2) func_175903_a(world, leafOrigin.add(x, y, z), leavesBlock.getDefaultState());
-							}
-							break;
-
-						case 1:
-
-							if(MathHelper.abs_int(x) < 2 && MathHelper.abs_int(z) < 2) {
-
-								if(MathHelper.abs_int(x) != MathHelper.abs_int(z) || (x == 0 && z == 0)) func_175903_a(world, leafOrigin.add(x, y, z), leavesBlock.getDefaultState());
-							}
-							break;
+						if(MathHelper.abs_int(x)
+						!= MathHelper.abs_int(z)
+						|| rand.nextInt(4) < 2) setBlockAndNotifyAdequately(
+							world, leafOrigin.add(x, y, z), leavesBlock.getDefaultState());
 					}
-				}
+					break;
+
+				case 1:
+
+					if(MathHelper.abs_int(x) < 2 && MathHelper.abs_int(z) < 2) {
+
+						if(MathHelper.abs_int(x)
+						!= MathHelper.abs_int(z)
+						|| (x == 0 && z == 0)) setBlockAndNotifyAdequately(
+							world, leafOrigin.add(x, y, z), leavesBlock.getDefaultState());
+					}
+					break;
 			}
-		}
+		}}}
 
 		for(int i = 0; i < height; i++) {
 
-			func_175903_a(world, pos.add(0, i, 0), logBlock.getDefaultState());
+			setBlockAndNotifyAdequately(world, pos.add(0, i, 0), logBlock.getDefaultState());
 		}
 		return true;
 	}
